@@ -4,11 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="green_a">#7BBA3A</color>
-    
+    <color name="green_a">#15C46C</color>
+
     <color name="white_f">#FFFFFF</color>
 
-    <color name="blue_f">#4A86CA</color>
+    <color name="blue_f">#15b5e9</color>
 
     <color name="black_f">#000000</color>
+    <color name="black_33">#33000000</color>
 </resources>

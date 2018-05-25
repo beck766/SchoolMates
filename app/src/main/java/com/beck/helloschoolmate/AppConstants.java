@@ -5,4 +5,5 @@ package com.beck.helloschoolmate;
  */
 
 public class AppConstants {
+
 }

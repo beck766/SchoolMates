@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/register_tv_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="18dp"
+            android:textColor="#666666"
+            android:textSize="13dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginTop="31dp">
+
+            <ImageView
+                android:id="@+id/register_image_verify"
+                android:layout_width="20dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="8dp"
+                android:src="@mipmap/register_verify_code" />
+
+            <EditText
+                android:id="@+id/register_et_verifyCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginLeft="9dp"
+                android:layout_toRightOf="@+id/register_image_verify"
+                android:hint="请输入验证码"
+                android:paddingBottom="20dp"
+                android:maxLength="6"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/register_btn_getVerfiyCode"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_selected"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="获取验证码"
+                android:textColor="#ffffff"
+                android:textSize="11dp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/register_btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="18dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/btn_login"
+            android:enabled="false"
+            android:text="下一步"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

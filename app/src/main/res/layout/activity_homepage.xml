@@ -9,6 +9,7 @@
     tools:context="com.beck.helloschoolmate.activity.HomePageActivity">
 
     <include layout="@layout/fragment_header" />
+
     <FrameLayout
         android:id="@+id/fragment_homepage"
         android:layout_width="match_parent"
@@ -19,5 +20,5 @@
         android:id="@+id/bnb_bottem_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
+        android:layout_gravity="bottom" />
 </LinearLayout>

@@ -1,11 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/green_a</item>
+        <item name="colorAccent">@color/green_a</item>
     </style>
 
     <!-- AppcompatActivity  全屏+无标题栏-->
@@ -20,5 +19,4 @@
         <item name="colorPrimaryDark">#00000001</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
 </resources>

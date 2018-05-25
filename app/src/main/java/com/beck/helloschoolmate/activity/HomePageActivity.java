@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.beck.base.activity.BaseActivity;
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.view.fragment.HomeBaseFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.DiscoverFragment;
@@ -24,9 +24,15 @@ import com.beck.helloschoolmate.view.widget.CircleImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class HomePageActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
+/**
+ * Created by beck on 2018/5/16.
+ * HomePage
+ */
+public class HomePageActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
 
+    private static final String TAG = "HomePageActivity";
     private HomeBaseFragment discoverFragment, linkmanFragment, mapFragment, messageFragment, stateFragment;
     private Fragment mFragment;
 
@@ -51,18 +57,18 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        changeStatusBarColor();
         setContentView(R.layout.activity_homepage);
         ButterKnife.bind(this);
+        changeStatusBarColor();
         initBottomNavigationBar();
         initFragment();
     }
 
     private void changeStatusBarColor() {
-            Window w = getWindow();
-            w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            w.setStatusBarColor(Color.parseColor("#7BBA3A"));
+        Window w = getWindow();
+        w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        w.setStatusBarColor(Color.parseColor("#15C46C"));
     }
 
     private void initBottomNavigationBar() {
@@ -121,6 +127,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 }
                 switchFragment(messageFragment);
                 tvTitle.setText(R.string.fragment_title_message);
+                ivAdd.setVisibility(View.VISIBLE);
                 break;
             case 1:
                 if (linkmanFragment == null) {
@@ -128,6 +135,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 }
                 switchFragment(linkmanFragment);
                 tvTitle.setText(R.string.fragment_title_linkman);
+                ivAdd.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 if (mapFragment == null) {
@@ -135,6 +143,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 }
                 switchFragment(mapFragment);
                 tvTitle.setText(R.string.fragment_title_map);
+                ivAdd.setVisibility(View.GONE);
                 break;
             case 3:
                 if (stateFragment == null) {
@@ -142,6 +151,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 }
                 switchFragment(stateFragment);
                 tvTitle.setText(R.string.fragment_title_state);
+                ivAdd.setVisibility(View.GONE);
                 break;
             case 4:
                 if (discoverFragment == null) {
@@ -149,6 +159,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 }
                 switchFragment(discoverFragment);
                 tvTitle.setText(R.string.fragment_title_discover);
+                ivAdd.setVisibility(View.GONE);
                 break;
         }
     }
@@ -197,5 +208,19 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
 
     public View getHeaderView() {
         return header;
+    }
+
+
+    @OnClick({R.id.iv_user_icon, R.id.iv_add})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_user_icon:
+                // TODO: 2018/5/21 点击头像右滑
+                this.finish();
+                break;
+            case R.id.iv_add:
+                // TODO: 2018/5/21 点击添加
+                break;
+        }
     }
 }
