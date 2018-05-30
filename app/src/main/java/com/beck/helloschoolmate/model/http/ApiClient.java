@@ -1,6 +1,8 @@
 package com.beck.helloschoolmate.model.http;
 
 
+import android.util.Log;
+
 import com.beck.helloschoolmate.BuildConfig;
 
 import okhttp3.OkHttpClient;
@@ -11,10 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by beck on 2018/5/25.
- *
  */
 
 public final class ApiClient {
+
+    private static final String TAG = "ApiClient";
 
     public static <T> T initMatesService(String baseUrl, Class<T> clazz) {
 
@@ -33,6 +36,7 @@ public final class ApiClient {
                 .client(client)
                 .build();
 
+        Log.i(TAG, "initMatesService: baseUrl:" + baseUrl);
         return retrofit.create(clazz);
     }
 }

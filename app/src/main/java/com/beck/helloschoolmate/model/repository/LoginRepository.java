@@ -1,6 +1,7 @@
 package com.beck.helloschoolmate.model.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.beck.base.util.NetworkUtils;
 import com.beck.helloschoolmate.model.http.ApiClient;
@@ -17,11 +18,14 @@ import io.reactivex.Observable;
  */
 
 public class LoginRepository {
+    private static final String TAG = "LoginRepository";
 
     public Observable<LoginResponse> getLoginResponse(Context context, LoginRequest request) {
 
-        if (!NetworkUtils.isNetworkConnected(context))
+        if (!NetworkUtils.isNetworkConnected(context)) {
+            Log.i(TAG, "getLoginResponse: 网络异常");
             return Observable.create(Emitter::onComplete);
+        }
 
         Observable<LoginResponse> loginInfo = ApiClient.initMatesService(ApiConstants.MATE_HOST, MatesService.class).getLoginInfo(request);
 

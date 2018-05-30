@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.RegisterActivity;
+import com.beck.helloschoolmate.presenter.RegisterCodePresenter;
 import com.beck.helloschoolmate.view.fragment.RegisterBaseFragment;
 
 import butterknife.BindView;
@@ -46,6 +47,12 @@ public class RegisterPhoneNumFragment extends RegisterBaseFragment<RegisterActiv
         ButterKnife.bind(this, view);
         registerEtTel.addTextChangedListener(textWatcher);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mActivity.setToolbarBackTitle("账号注册");
     }
 
     TextWatcher textWatcher = new TextWatcher() {
@@ -100,5 +107,6 @@ public class RegisterPhoneNumFragment extends RegisterBaseFragment<RegisterActiv
         bundle.putString("tel", registerEtTel.getText().toString());
         registerCodeFragment.setArguments(bundle);
         mActivity.setFragment(registerCodeFragment, "register_code", true);
+        new RegisterCodePresenter(mActivity,registerCodeFragment);
     }
 }

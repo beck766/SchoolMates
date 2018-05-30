@@ -23,7 +23,6 @@ public class UserManager {
         return instance;
     }
 
-
     /**
      * 保存自动登录的用户信息
      */
@@ -42,20 +41,15 @@ public class UserManager {
         editor.apply();
     }
 
-    public void clearLoginInfo(Context context){
+    public void clearLoginInfo(Context context) {
         SharedPreferences sp = context.getSharedPreferences("LoginUserInfo", Context.MODE_PRIVATE);//Context.MODE_PRIVATE表示SharePrefences的数据只有自己应用程序能访问。
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         editor.apply();
     }
 
-
     /**
      * 获取用户信息model
-     *
-     * @param context
-     * @param
-     * @param
      */
     public LoginUserInfo getLoginUserInfo(Context context) {
         SharedPreferences sp = context.getSharedPreferences("LoginUserInfo", Context.MODE_PRIVATE);
@@ -64,7 +58,6 @@ public class UserManager {
         LoginUserInfo.setPassword(sp.getString("PASSWORD", ""));
         return LoginUserInfo;
     }
-
 
     /**
      * LoginUserInfo中是否有数据
