@@ -1,10 +1,10 @@
-package com.beck.helloschoolmate.model.http.entity.user;
+package com.beck.helloschoolmate.model.http.entity.addfriend;
 
 /**
- * Created by beck on 2018/5/29.
+ * Created by beck on 2018/5/31.
  */
 
-public class VerfiyCodeResponse {
+public class AddFriendSendResponse {
 
     /**
      * success : true

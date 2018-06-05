@@ -122,7 +122,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
     @Override
     public void loginSuccess(LoginResponse loginResponse) {
         if (loginResponse.isSuccess()) {
-            UserManager.getInstance().saveLoginUserInfo(this, phone);
+            UserManager.getInstance().saveLoginUserInfo(this, phone,loginResponse.getResult().getUserToken());
             Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
             startActivity(intent);
         } else {

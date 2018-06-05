@@ -14,11 +14,11 @@ import android.view.ViewGroup;
  * Created by beck on 2018/5/21.
  */
 
-public class RegisterBaseFragment <T> extends Fragment {
+public class MateBaseFragment<T> extends Fragment {
 
-    private static final String TAG = "RegisterBaseFragment";
+    private static final String TAG = "MateBaseFragment";
     protected T mActivity;
-    public RegisterBaseFragment() {
+    public MateBaseFragment() {
         super();
     }
 

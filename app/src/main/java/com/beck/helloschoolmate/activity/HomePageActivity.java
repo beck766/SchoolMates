@@ -1,9 +1,11 @@
 package com.beck.helloschoolmate.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,6 +22,7 @@ import com.beck.helloschoolmate.view.fragment.homepage.LinkmanFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.MapFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.MessageFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.StateFragment;
+import com.beck.helloschoolmate.view.widget.AddFriPopupWindow;
 import com.beck.helloschoolmate.view.widget.CircleImageView;
 
 import butterknife.BindView;
@@ -53,6 +56,7 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
 
     @BindView(R.id.iv_add)
     ImageView ivAdd;
+    private AddFriPopupWindow menuWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,8 +223,28 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
                 this.finish();
                 break;
             case R.id.iv_add:
-                // TODO: 2018/5/21 点击添加
+                menuWindow = new AddFriPopupWindow(this, onClickListener);
+                menuWindow.showAtBottom(ivAdd);
                 break;
         }
     }
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            menuWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.ll_addFriend:
+                    Intent intent = new Intent(HomePageActivity.this, AddFriendActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.ll_qr_code_scanning:
+                    Log.i(TAG, "onClick: qr_code_scann");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }

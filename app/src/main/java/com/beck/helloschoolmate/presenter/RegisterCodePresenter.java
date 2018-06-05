@@ -9,6 +9,7 @@ import com.beck.helloschoolmate.model.http.entity.user.GetCodeResponse;
 import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeResponse;
 import com.beck.helloschoolmate.model.repository.RegisterCodeRepository;
+import com.beck.helloschoolmate.util.UserManager;
 
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeoutException;
@@ -60,9 +61,13 @@ public class RegisterCodePresenter implements RegisterCodeContract.Presenter {
                         boolean isSuccess = getCodeResponse.isSuccess();
                         Log.i(TAG, "onNext: 是否成功=" + isSuccess);
                         if (isSuccess) {
+                            String userToken = getCodeResponse.getResult().getUserToken();
+                            UserManager.getInstance().saveRegisterInfo(context, userToken);
+                            Log.i(TAG, "onNext: "+userToken);
                             view.getCodeSuccess(true);
                         } else {
-                            view.RequestError(false+"");
+                            view.RequestError(false + "");
+                            Log.i(TAG, "onNext: 注册失败");
                         }
                     }
 
@@ -86,14 +91,20 @@ public class RegisterCodePresenter implements RegisterCodeContract.Presenter {
 
     @Override
     public void verfiyCode(VerfiyCodeRequest verfiyCodeRequest) {
-        new RegisterCodeRepository().verfiyCode(context, verfiyCodeRequest)
+        String userToken = UserManager.getInstance().getRegisterToken(context);
+        Log.i(TAG, "verfiyCode: "+userToken);
+        new RegisterCodeRepository().verfiyCode(context, userToken, verfiyCodeRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<VerfiyCodeResponse>() {
                     @Override
                     public void onNext(VerfiyCodeResponse verfiyCodeResponse) {
                         Log.i(TAG, "onNext: 是否成功：" + verfiyCodeResponse.isSuccess());
-                        view.verfiySussess(verfiyCodeResponse.getResult().getUserToken());
+                        if (verfiyCodeResponse.isSuccess()) {
+                            view.verfiySussess(userToken);
+                        } else {
+                            view.RequestError("验证码错误");
+                        }
                     }
 
                     @Override

@@ -21,7 +21,7 @@ import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.RegisterActivity;
 import com.beck.helloschoolmate.contract.RegisterPasswordContract;
 import com.beck.helloschoolmate.model.http.entity.user.RegisterRequest;
-import com.beck.helloschoolmate.view.fragment.RegisterBaseFragment;
+import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +32,7 @@ import butterknife.Unbinder;
  * Created by beck on 2018/5/21.
  */
 
-public class RegisterPasswordFragment extends RegisterBaseFragment<RegisterActivity> implements RegisterPasswordContract.View{
+public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity> implements RegisterPasswordContract.View{
 
     private static final String TAG = "RegisterPasswordFragment";
     private boolean registerPwdShow = false;
@@ -128,7 +128,7 @@ public class RegisterPasswordFragment extends RegisterBaseFragment<RegisterActiv
                 } else {
                     RegisterRequest registerRequest = new RegisterRequest();
                     registerRequest.setPhoneNumber(tel);
-                    registerRequest.setPassword(pwdErrorSet.getText().toString().trim());
+                    registerRequest.setPassword(pwd);
                     presenter.register(accessToken,registerRequest);
                     break;
                 }

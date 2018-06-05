@@ -42,15 +42,22 @@ public abstract class BaseRFActivity extends AppCompatActivity {
         });
     }
 
-    public void setToolbarTitle(String title) {
+    public void setToolbarBack() {
         mToolBar = (Toolbar) findViewById(R.id.custom_toolbar);
         mToolbarTitle = (TextView) findViewById(R.id.custom_toolbar_title);
-        setSupportActionBar(mToolBar);
         if (mToolBar != null) {
             //将Toolbar显示到界面
             setSupportActionBar(mToolBar);
         }
-        mToolbarTitle.setText(title);
+        mToolbarTitle.setVisibility(View.GONE);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        mToolBar.setNavigationIcon(R.mipmap.back_icon);
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }

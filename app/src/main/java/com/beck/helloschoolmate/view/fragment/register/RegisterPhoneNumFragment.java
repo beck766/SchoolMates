@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.RegisterActivity;
 import com.beck.helloschoolmate.presenter.RegisterCodePresenter;
-import com.beck.helloschoolmate.view.fragment.RegisterBaseFragment;
+import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +27,7 @@ import butterknife.OnClick;
  * Created by beck on 2018/5/21.
  */
 
-public class RegisterPhoneNumFragment extends RegisterBaseFragment<RegisterActivity> {
+public class RegisterPhoneNumFragment extends MateBaseFragment<RegisterActivity> {
 
     private static final String TAG = "RegisterPhoneNumFragment";
     @BindView(R.id.register_et_tel)

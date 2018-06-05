@@ -3,10 +3,11 @@ package com.beck.helloschoolmate.presenter;
 import android.content.Context;
 import android.util.Log;
 
-import com.beck.helloschoolmate.contract.RegisterPasswordContract;
-import com.beck.helloschoolmate.model.http.entity.user.RegisterRequest;
-import com.beck.helloschoolmate.model.http.entity.user.RegisterResponse;
-import com.beck.helloschoolmate.model.repository.RegisterCompleteRepository;
+import com.beck.helloschoolmate.contract.AddFriSearchContract;
+import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchRequest;
+import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchResponse;
+import com.beck.helloschoolmate.model.repository.AddFriSearchRepository;
+import com.beck.helloschoolmate.util.UserManager;
 
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeoutException;
@@ -16,16 +17,16 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by beck on 2018/5/30.
+ * Created by beck on 2018/6/2.
  */
 
-public class RegisterPasswordPresenter implements RegisterPasswordContract.Presenter {
+public class AddFriSearchPresenter implements AddFriSearchContract.Presenter {
 
-    private static final String TAG = "RegisterPasswordPresent";
-    private RegisterPasswordContract.View view;
+    private static final String TAG = "AddFriSearchPresenter";
+    private AddFriSearchContract.View view;
     private Context context;
 
-    public RegisterPasswordPresenter(Context context, RegisterPasswordContract.View view) {
+    public AddFriSearchPresenter(Context context, AddFriSearchContract.View view) {
         this.view = view;
         this.context = context;
         view.setPresenter(this);
@@ -47,19 +48,19 @@ public class RegisterPasswordPresenter implements RegisterPasswordContract.Prese
     }
 
     @Override
-    public void register(String accessToken, RegisterRequest registerRequest) {
-        Log.i(TAG, "register: "+registerRequest.getPassword());
-        new RegisterCompleteRepository().registerComplete(context, accessToken, registerRequest)
+    public void search(AddFriSearchRequest addFriSearchRequest) {
+        String userToken = UserManager.getInstance().getUserToken(context);
+        new AddFriSearchRepository().getAddFriResponse(context, userToken, addFriSearchRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<RegisterResponse>() {
+                .subscribe(new DisposableObserver<AddFriSearchResponse>() {
                     @Override
-                    public void onNext(RegisterResponse registerResponse) {
-                        Log.i(TAG, "onNext: 注册是否成功：" + registerResponse.isSuccess());
-                        if (registerResponse.isSuccess()) {
-                            view.registerSuccess();
+                    public void onNext(AddFriSearchResponse addFriSearchResponse) {
+                        Log.i(TAG, "onNext: " + addFriSearchResponse.isSuccess());
+                        if (addFriSearchResponse.isSuccess()) {
+                            view.searchSuccess(addFriSearchResponse);
                         } else {
-                            view.RequestError("注册失败");
+                            view.RequestError("账号不存在");
                         }
                     }
 

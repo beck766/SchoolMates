@@ -33,9 +33,7 @@
                 android:maxLength="11"
                 android:paddingBottom="20dp"
                 android:textSize="15sp" />
-
         </LinearLayout>
-
 
         <Button
             android:id="@+id/register_btn_next"

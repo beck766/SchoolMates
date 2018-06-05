@@ -20,7 +20,7 @@ import com.beck.helloschoolmate.contract.RegisterCodeContract;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeRequest;
 import com.beck.helloschoolmate.presenter.RegisterPasswordPresenter;
-import com.beck.helloschoolmate.view.fragment.RegisterBaseFragment;
+import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +30,7 @@ import butterknife.OnClick;
  * Created by beck on 2018/5/21.
  */
 
-public class RegisterCodeFragment extends RegisterBaseFragment<RegisterActivity> implements RegisterCodeContract.View {
+public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> implements RegisterCodeContract.View {
 
     private static final String TAG = "RegisterCodeFragment";
 
@@ -108,7 +108,6 @@ public class RegisterCodeFragment extends RegisterBaseFragment<RegisterActivity>
                     Toast.makeText(mActivity, "网络不稳定！", Toast.LENGTH_SHORT).show();
                 } else {
                     VerfiyCodeRequest verfiyCodeRequest = new VerfiyCodeRequest();
-                    verfiyCodeRequest.setPhoneNumber(tel);
                     verfiyCodeRequest.setCaptcha(registerEtVerifyCode.getText().toString().trim());
                     presenter.verfiyCode(verfiyCodeRequest);
                 }

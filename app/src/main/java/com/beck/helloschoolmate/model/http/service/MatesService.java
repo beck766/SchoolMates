@@ -1,5 +1,9 @@
 package com.beck.helloschoolmate.model.http.service;
 
+import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchRequest;
+import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchResponse;
+import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendRequest;
+import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendResponse;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeResponse;
 import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
@@ -41,11 +45,12 @@ public interface MatesService {
     /**
      * 检验验证码
      *
+     * @param accessToken
      * @param verfiyCodeRequest
      * @return
      */
     @POST("user/captcha/checkout/")
-    Observable<VerfiyCodeResponse> verfiyCode(@Body VerfiyCodeRequest verfiyCodeRequest);
+    Observable<VerfiyCodeResponse> verfiyCode(@Query("accessToken") String accessToken, @Body VerfiyCodeRequest verfiyCodeRequest);
 
     /**
      * 完成注册
@@ -56,4 +61,25 @@ public interface MatesService {
      */
     @POST("user/register/")
     Observable<RegisterResponse> register(@Query("accessToken") String accessToken, @Body RegisterRequest registerRequest);
+
+    /**
+     * 查找好友
+     *
+     * @param accessToken
+     * @param addFriSearchRequest
+     * @return
+     */
+    @POST("user/search/")
+    Observable<AddFriSearchResponse> addFriendSearch(@Query("accessToken") String accessToken, @Body AddFriSearchRequest addFriSearchRequest);
+
+    /**
+     * 查找好友
+     *
+     * @param accessToken
+     * @param addFriendSendRequest
+     * @return
+     */
+    @POST("friend/request/add/")
+    Observable<AddFriendSendResponse> addFriendSend(@Query("accessToken") String accessToken, @Body AddFriendSendRequest addFriendSendRequest);
+
 }

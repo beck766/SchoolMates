@@ -8,11 +8,9 @@ public class VerfiyCodeRequest {
 
     /**
      * captcha : 892378
-     * phoneNumber : 18270892378
      */
 
     private String captcha;
-    private String phoneNumber;
 
     public String getCaptcha() {
         return captcha;
@@ -20,13 +18,5 @@ public class VerfiyCodeRequest {
 
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }

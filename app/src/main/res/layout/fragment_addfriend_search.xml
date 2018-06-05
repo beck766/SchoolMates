@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/et_search_fri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="账号/手机号"
+            android:inputType="number"
+            android:maxLength="11" />
+
+        <Button
+            android:id="@+id/btn_search_fri"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/et_search_fri"
+            android:layout_marginEnd="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
+            android:background="@drawable/btn_login"
+            android:text="查找"
+            android:textColor="@color/white_f"
+            android:textSize="@dimen/x16" />
+    </RelativeLayout>
+</LinearLayout>

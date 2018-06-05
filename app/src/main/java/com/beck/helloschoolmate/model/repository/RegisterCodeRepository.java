@@ -36,14 +36,14 @@ public class RegisterCodeRepository {
         return codeResponseObservable;
     }
 
-    public Observable<VerfiyCodeResponse> verfiyCode(Context context, VerfiyCodeRequest verfiyCodeRequest) {
+    public Observable<VerfiyCodeResponse> verfiyCode(Context context, String token, VerfiyCodeRequest verfiyCodeRequest) {
 
         if (!NetworkUtils.isNetworkConnected(context)) {
             Log.i(TAG, "verfiyCode: 网络异常");
             return Observable.create(Emitter::onComplete);
         }
 
-        Observable<VerfiyCodeResponse> verfiyCodeResponseObservable = ApiClient.initMatesService(ApiConstants.MATE_HOST, MatesService.class).verfiyCode(verfiyCodeRequest);
+        Observable<VerfiyCodeResponse> verfiyCodeResponseObservable = ApiClient.initMatesService(ApiConstants.MATE_HOST, MatesService.class).verfiyCode(token,verfiyCodeRequest);
 
         assert verfiyCodeResponseObservable != null;
 

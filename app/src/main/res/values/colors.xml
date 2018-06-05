@@ -7,9 +7,13 @@
     <color name="green_a">#15C46C</color>
 
     <color name="white_f">#FFFFFF</color>
+    <color name="white_e">#F2F2F2</color>
 
     <color name="blue_f">#15b5e9</color>
 
     <color name="black_f">#000000</color>
+    <color name="black_23">#232323</color>
     <color name="black_33">#33000000</color>
+    <color name="black_e">#44000000</color>
+    <color name="line">#aafaf9ff</color>
 </resources>
