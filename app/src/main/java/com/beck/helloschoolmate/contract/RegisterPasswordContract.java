@@ -12,8 +12,6 @@ public interface RegisterPasswordContract {
 
     interface View extends BaseView<RegisterPasswordContract.Presenter> {
 
-        void RequestError(String error);
-
         void registerSuccess();
     }
 

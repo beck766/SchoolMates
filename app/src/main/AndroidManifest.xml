@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
@@ -37,10 +37,13 @@
             </intent-filter>-->
         </activity>
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.login.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.AddFriendActivity"
+            android:name=".activity.friend.AddFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.friend.CheckNewFriActivity"
             android:screenOrientation="portrait" />
     </application>
 

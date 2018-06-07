@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.beck.base.util.NetworkUtils;
 import com.beck.helloschoolmate.R;
-import com.beck.helloschoolmate.activity.RegisterActivity;
+import com.beck.helloschoolmate.activity.login.RegisterActivity;
 import com.beck.helloschoolmate.contract.RegisterCodeContract;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeRequest;
@@ -116,6 +116,11 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
     }
 
     @Override
+    public void requestError(String error) {
+        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void setPresenter(RegisterCodeContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -123,11 +128,6 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
     @Override
     public RegisterCodeContract.Presenter getPresenter() {
         return presenter;
-    }
-
-    @Override
-    public void RequestError(String error) {
-        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

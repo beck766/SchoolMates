@@ -14,7 +14,6 @@ public interface LoginContract {
 
     interface View extends BaseView<Presenter> {
         void loginSuccess(LoginResponse loginResponse);
-        void loginError(String error);
         void InitUserInfo(LoginUserInfo loginUserInfo);
     }
 

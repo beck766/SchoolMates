@@ -71,11 +71,11 @@ public class LoginPresenter implements LoginContract.Presenter {
                     public void onError(Throwable e) {
                         Log.i(TAG, "onError: " + e.toString());
                         if (e instanceof TimeoutException) {
-                            view.loginError("请求超时");
+                            view.requestError("请求超时");
                         } else if (e instanceof SocketTimeoutException) {
-                            view.loginError("请求超时");
+                            view.requestError("请求超时");
                         } else {
-                            view.loginError("服务器异常");
+                            view.requestError("服务器异常");
                         }
                     }
 

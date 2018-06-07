@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x2"
+        android:background="@color/white_e"
+        android:gravity="center_vertical"
+        android:text="   好友通知"
+        android:textColor="@color/black_33" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_newFriend_check"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+</LinearLayout>

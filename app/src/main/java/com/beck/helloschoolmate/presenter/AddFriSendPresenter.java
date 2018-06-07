@@ -59,7 +59,7 @@ public class AddFriSendPresenter implements AddFriSendContract.Presenter{
                         if (addFriendSendResponse.isSuccess()) {
                             view.searchSuccess();
                         } else {
-                            view.RequestError("账号不存在");
+                            view.requestError("账号不存在");
                         }
                     }
 
@@ -67,11 +67,11 @@ public class AddFriSendPresenter implements AddFriSendContract.Presenter{
                     public void onError(Throwable e) {
                         Log.i(TAG, "onError: " + e.toString());
                         if (e instanceof TimeoutException) {
-                            view.RequestError("请求超时");
+                            view.requestError("请求超时");
                         } else if (e instanceof SocketTimeoutException) {
-                            view.RequestError("请求超时");
+                            view.requestError("请求超时");
                         } else {
-                            view.RequestError("服务器异常");
+                            view.requestError("服务器异常");
                         }
                     }
 

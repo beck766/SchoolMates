@@ -7,7 +7,7 @@
     <include layout="@layout/toolbar_item" />
 
     <FrameLayout
-        android:id="@+id/container_addFriend"
+        android:id="@+id/container_general"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

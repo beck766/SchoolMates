@@ -66,7 +66,7 @@ public class RegisterCodePresenter implements RegisterCodeContract.Presenter {
                             Log.i(TAG, "onNext: "+userToken);
                             view.getCodeSuccess(true);
                         } else {
-                            view.RequestError(false + "");
+                            view.requestError(false + "");
                             Log.i(TAG, "onNext: 注册失败");
                         }
                     }
@@ -75,11 +75,11 @@ public class RegisterCodePresenter implements RegisterCodeContract.Presenter {
                     public void onError(Throwable e) {
                         Log.i(TAG, "onError: " + e.toString());
                         if (e instanceof TimeoutException) {
-                            view.RequestError("请求超时");
+                            view.requestError("请求超时");
                         } else if (e instanceof SocketTimeoutException) {
-                            view.RequestError("请求超时");
+                            view.requestError("请求超时");
                         } else {
-                            view.RequestError("服务器异常");
+                            view.requestError("服务器异常");
                         }
                     }
 
@@ -103,7 +103,7 @@ public class RegisterCodePresenter implements RegisterCodeContract.Presenter {
                         if (verfiyCodeResponse.isSuccess()) {
                             view.verfiySussess(userToken);
                         } else {
-                            view.RequestError("验证码错误");
+                            view.requestError("验证码错误");
                         }
                     }
 
@@ -111,11 +111,11 @@ public class RegisterCodePresenter implements RegisterCodeContract.Presenter {
                     public void onError(Throwable e) {
                         Log.i(TAG, "onError: " + e.toString());
                         if (e instanceof TimeoutException) {
-                            view.RequestError("请求超时");
+                            view.requestError("请求超时");
                         } else if (e instanceof SocketTimeoutException) {
-                            view.RequestError("请求超时");
+                            view.requestError("请求超时");
                         } else {
-                            view.RequestError("服务器异常");
+                            view.requestError("服务器异常");
                         }
                     }
 

@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.beck.helloschoolmate.R;
-import com.beck.helloschoolmate.activity.RegisterActivity;
+import com.beck.helloschoolmate.activity.login.RegisterActivity;
 import com.beck.helloschoolmate.presenter.RegisterCodePresenter;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 

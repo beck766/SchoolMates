@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.beck.base.util.NetworkUtils;
 import com.beck.helloschoolmate.R;
-import com.beck.helloschoolmate.activity.RegisterActivity;
+import com.beck.helloschoolmate.activity.login.RegisterActivity;
 import com.beck.helloschoolmate.contract.RegisterPasswordContract;
 import com.beck.helloschoolmate.model.http.entity.user.RegisterRequest;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
@@ -160,6 +160,11 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
     };
 
     @Override
+    public void requestError(String error) {
+        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void setPresenter(RegisterPasswordContract.Presenter presenter) {
         this.presenter=presenter;
     }
@@ -167,11 +172,6 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
     @Override
     public RegisterPasswordContract.Presenter getPresenter() {
         return presenter;
-    }
-
-    @Override
-    public void RequestError(String error) {
-        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

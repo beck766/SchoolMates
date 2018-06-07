@@ -5,6 +5,7 @@ package com.beck.base.view;
  */
 public interface BaseView<T> {
 
+    void requestError(String error);
     void setPresenter(T presenter);
     T getPresenter();
 }

@@ -2,18 +2,21 @@ package com.beck.helloschoolmate.view.fragment.addfriend;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.beck.helloschoolmate.R;
-import com.beck.helloschoolmate.activity.AddFriendActivity;
+import com.beck.helloschoolmate.activity.friend.AddFriendActivity;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchResponse;
 import com.beck.helloschoolmate.presenter.AddFriSendPresenter;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 import com.beck.helloschoolmate.view.widget.CircleImageView;
 import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +29,7 @@ import butterknife.Unbinder;
 
 public class AddFriendInfoFragment extends MateBaseFragment<AddFriendActivity> {
 
+    private static final String TAG = "AddFriendInfoFragment";
     @BindView(R.id.civ_search_icon)
     CircleImageView civSearchIcon;
 
@@ -75,6 +79,7 @@ public class AddFriendInfoFragment extends MateBaseFragment<AddFriendActivity> {
     }
 
     private void initData() {
+        StringBuilder stringBuilder = new StringBuilder();
         addFriSearchResponse = getArguments().getParcelable("addFriSearchResponse");
         if (addFriSearchResponse != null) {
             tvSearchNum.setText(addFriSearchResponse.getResult().getAccount());
@@ -87,14 +92,26 @@ public class AddFriendInfoFragment extends MateBaseFragment<AddFriendActivity> {
             } else {
                 tvSearchSex.setText("保密");
             }
-            tvSearchAddress.setText(addFriSearchResponse.getResult().getArea());
+            tvSearchAddress.setText("");
             tvSearchHomePlace.setText(addFriSearchResponse.getResult().getHomeplace());
             tvSearchWork.setText(addFriSearchResponse.getResult().getIndustry());
-            tvSearchHobby.setText(addFriSearchResponse.getResult().getHobbies());
+            if (addFriSearchResponse.getResult().getHobbies() != null && addFriSearchResponse.getResult().getHobbies().size() > 0) {
+                for (int i = 0; i < addFriSearchResponse.getResult().getHobbies().size(); i++) {
+                    stringBuilder.append(addFriSearchResponse.getResult().getHobbies().get(i)).append(" ");
+                }
+                tvSearchHobby.setText(stringBuilder.toString());
+            } else {
+                tvSearchHobby.setText("");
+            }
             tvSearchSignature.setText(addFriSearchResponse.getResult().getSignature());
-            Glide.with(this).load(addFriSearchResponse.getResult().getUserIcons()).placeholder(R.mipmap.user_icon).error(R.mipmap.user_icon).into(civSearchIcon);
+            List<String> userImgs = addFriSearchResponse.getResult().getUserImgs();
+            if (userImgs != null && addFriSearchResponse.getResult().getUserImgs().size() > 0) {
+                Log.i(TAG, "initData: 有图片"+addFriSearchResponse.getResult().getUserImgs().get(0));
+                Glide.with(this).load(addFriSearchResponse.getResult().getUserImgs().get(0)).error(R.mipmap.user_icon).into(civSearchIcon);
+            } else {
+                Glide.with(this).load(R.mipmap.user_icon).into(civSearchIcon);
+            }
         }
-
     }
 
 
@@ -108,7 +125,7 @@ public class AddFriendInfoFragment extends MateBaseFragment<AddFriendActivity> {
     public void onViewClicked() {
         AddFriendSendFragment addFriendSendFragment = AddFriendSendFragment.newInstance();
         Bundle bundle = new Bundle();
-        bundle.putString("addFriendSend_userId", addFriSearchResponse.getResult().getAccount());
+        bundle.putInt("addFriendSend_userId", addFriSearchResponse.getResult().getUserId());
         addFriendSendFragment.setArguments(bundle);
         mActivity.setFragment(addFriendSendFragment, "addFriend_send", true);
         new AddFriSendPresenter(mActivity, addFriendSendFragment);

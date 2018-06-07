@@ -1,4 +1,4 @@
-package com.beck.helloschoolmate.activity;
+package com.beck.helloschoolmate.activity.login;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.beck.base.activity.BaseActivity;
 import com.beck.helloschoolmate.R;
+import com.beck.helloschoolmate.activity.HomePageActivity;
 import com.beck.helloschoolmate.contract.LoginContract;
 import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
 import com.beck.helloschoolmate.model.http.entity.user.LoginResponse;
@@ -110,6 +111,11 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
     }
 
     @Override
+    public void requestError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -128,11 +134,6 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
         } else {
             Toast.makeText(this, loginResponse.getErrorMsg(), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void loginError(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

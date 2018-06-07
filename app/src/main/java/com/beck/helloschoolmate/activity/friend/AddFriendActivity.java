@@ -1,4 +1,4 @@
-package com.beck.helloschoolmate.activity;
+package com.beck.helloschoolmate.activity.friend;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,13 +19,12 @@ import java.util.List;
  */
 
 public class AddFriendActivity extends BaseRFActivity {
-
     private List<Fragment> fragments = new ArrayList<Fragment>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_friend);
+        setContentView(R.layout.activity_general);
         if (savedInstanceState == null) {
             AddFriendSearchFragment addFriendSearchFragment = AddFriendSearchFragment.newInstance();
             setFragment(addFriendSearchFragment, "addFriend_search", false);
@@ -39,7 +38,7 @@ public class AddFriendActivity extends BaseRFActivity {
         }
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.container_addFriend, fragment, tag);
+        ft.replace(R.id.container_general, fragment, tag);
         if (pullToStack) ft.addToBackStack(null);
         ft.commit();
     }

@@ -1,34 +1,33 @@
-package com.beck.helloschoolmate.activity;
+package com.beck.helloschoolmate.activity.friend;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import com.beck.base.activity.BaseRFActivity;
 import com.beck.helloschoolmate.R;
-import com.beck.helloschoolmate.view.fragment.register.RegisterPhoneNumFragment;
+import com.beck.helloschoolmate.presenter.NewFriCheckPresenter;
+import com.beck.helloschoolmate.view.fragment.newfriend.NewFriCheckFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by beck on 2018/5/21.
- * register
+ * Created by beck on 2018/6/7.
  */
 
-public class RegisterActivity extends BaseRFActivity {
-    private static final String TAG = "RegisterActivity";
+public class CheckNewFriActivity extends BaseRFActivity {
     private List<Fragment> fragments = new ArrayList<Fragment>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        setToolbarBackTitle("账号注册");
+        setContentView(R.layout.activity_general);
         if (savedInstanceState == null) {
-            setFragment(RegisterPhoneNumFragment.newInstance(), "register_phoneNum", false);
+            NewFriCheckFragment newFriCheckFragment = NewFriCheckFragment.newInstance();
+            setFragment(newFriCheckFragment, "newFriend_check", false);
+            new NewFriCheckPresenter(this, newFriCheckFragment);
         }
     }
 
@@ -38,7 +37,7 @@ public class RegisterActivity extends BaseRFActivity {
         }
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.container_register, fragment, tag);
+        ft.replace(R.id.container_general, fragment, tag);
         if (pullToStack) ft.addToBackStack(null);
         ft.commit();
     }
@@ -46,6 +45,5 @@ public class RegisterActivity extends BaseRFActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy");
     }
 }

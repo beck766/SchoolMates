@@ -3,6 +3,8 @@ package com.beck.helloschoolmate.model.http.entity.addfriend;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by beck on 2018/6/2.
  */
@@ -84,29 +86,54 @@ public class AddFriSearchResponse implements Parcelable {
     }
 
     public static class ResultBean implements Parcelable {
+
+        public String getArea() {
+            return area;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
+
         /**
          * userId : 1
+         * account : i_am_big_zhi
          * nickName : 逼格秩
+         * userImgs : ["http://hongqian.f3322.net:2290/mates/api/img/stu.jpg","http://hongqian.f3322.net:2290/mates/api/img/login.png"]
          * sex : 1
-         * account : 1
-         * userIcons : null
-         * area : null
-         * homeplace : null
-         * industry : null
-         * hobbies : null
-         * signature : null
+         * birthday : null
+         * "area": null
+         * homeplace : 江苏 连云港
+         * industry : IT
+         * hobbies : ["健身"]
+         * signature : 生活太表面化，就容易被俗化
+         * qrcode : null
+         * remarkName : null
          */
 
+
         private int userId;
+        private String account;
         private String nickName;
         private int sex;
-        private String account;
-        private String userIcons;
-        private String area;
+        private String birthday;
         private String homeplace;
+        private String area;
         private String industry;
-        private String hobbies;
         private String signature;
+        private String qrcode;
+        private String remarkName;
+        private List<String> userImgs;
+        private List<String> hobbies;
+        private String friend;
+
+        public String getFriend() {
+            return friend;
+        }
+
+        public void setFriend(String friend) {
+            this.friend = friend;
+        }
 
         public int getUserId() {
             return userId;
@@ -114,6 +141,14 @@ public class AddFriSearchResponse implements Parcelable {
 
         public void setUserId(int userId) {
             this.userId = userId;
+        }
+
+        public String getAccount() {
+            return account;
+        }
+
+        public void setAccount(String account) {
+            this.account = account;
         }
 
         public String getNickName() {
@@ -132,28 +167,12 @@ public class AddFriSearchResponse implements Parcelable {
             this.sex = sex;
         }
 
-        public String getAccount() {
-            return account;
+        public String getBirthday() {
+            return birthday;
         }
 
-        public void setAccount(String account) {
-            this.account = account;
-        }
-
-        public String getUserIcons() {
-            return userIcons;
-        }
-
-        public void setUserIcons(String userIcons) {
-            this.userIcons = userIcons;
-        }
-
-        public String getArea() {
-            return area;
-        }
-
-        public void setArea(String area) {
-            this.area = area;
+        public void setBirthday(String birthday) {
+            this.birthday = birthday;
         }
 
         public String getHomeplace() {
@@ -172,20 +191,47 @@ public class AddFriSearchResponse implements Parcelable {
             this.industry = industry;
         }
 
-        public String getHobbies() {
-            return hobbies;
-        }
-
-        public void setHobbies(String hobbies) {
-            this.hobbies = hobbies;
-        }
-
         public String getSignature() {
             return signature;
         }
 
         public void setSignature(String signature) {
             this.signature = signature;
+        }
+
+        public String getQrcode() {
+            return qrcode;
+        }
+
+        public void setQrcode(String qrcode) {
+            this.qrcode = qrcode;
+        }
+
+        public String getRemarkName() {
+            return remarkName;
+        }
+
+        public void setRemarkName(String remarkName) {
+            this.remarkName = remarkName;
+        }
+
+        public List<String> getUserImgs() {
+            return userImgs;
+        }
+
+        public void setUserImgs(List<String> userImgs) {
+            this.userImgs = userImgs;
+        }
+
+        public List<String> getHobbies() {
+            return hobbies;
+        }
+
+        public void setHobbies(List<String> hobbies) {
+            this.hobbies = hobbies;
+        }
+
+        public ResultBean() {
         }
 
         @Override
@@ -196,34 +242,39 @@ public class AddFriSearchResponse implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.userId);
+            dest.writeString(this.account);
             dest.writeString(this.nickName);
             dest.writeInt(this.sex);
-            dest.writeString(this.account);
-            dest.writeString(this.userIcons);
-            dest.writeString(this.area);
+            dest.writeString(this.birthday);
             dest.writeString(this.homeplace);
+            dest.writeString(this.area);
             dest.writeString(this.industry);
-            dest.writeString(this.hobbies);
             dest.writeString(this.signature);
-        }
-
-        public ResultBean() {
+            dest.writeString(this.qrcode);
+            dest.writeString(this.remarkName);
+            dest.writeStringList(this.userImgs);
+            dest.writeStringList(this.hobbies);
+            dest.writeString(this.friend);
         }
 
         protected ResultBean(Parcel in) {
             this.userId = in.readInt();
+            this.account = in.readString();
             this.nickName = in.readString();
             this.sex = in.readInt();
-            this.account = in.readString();
-            this.userIcons = in.readString();
-            this.area = in.readString();
+            this.birthday = in.readString();
             this.homeplace = in.readString();
+            this.area = in.readString();
             this.industry = in.readString();
-            this.hobbies = in.readString();
             this.signature = in.readString();
+            this.qrcode = in.readString();
+            this.remarkName = in.readString();
+            this.userImgs = in.createStringArrayList();
+            this.hobbies = in.createStringArrayList();
+            this.friend = in.readString();
         }
 
-        public static final Parcelable.Creator<ResultBean> CREATOR = new Parcelable.Creator<ResultBean>() {
+        public static final Creator<ResultBean> CREATOR = new Creator<ResultBean>() {
             @Override
             public ResultBean createFromParcel(Parcel source) {
                 return new ResultBean(source);
@@ -248,7 +299,7 @@ public class AddFriSearchResponse implements Parcelable {
         dest.writeInt(this.errorCode);
         dest.writeString(this.resultCount);
         dest.writeString(this.errorCount);
-        dest.writeParcelable(this.result, flags);
+        dest.writeParcelable((Parcelable) this.result, flags);
         dest.writeString(this.results);
     }
 

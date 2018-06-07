@@ -16,6 +16,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.beck.base.activity.BaseActivity;
 import com.beck.helloschoolmate.R;
+import com.beck.helloschoolmate.activity.friend.AddFriendActivity;
 import com.beck.helloschoolmate.view.fragment.HomeBaseFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.DiscoverFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.LinkmanFragment;
@@ -82,8 +83,8 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
         bnbBottemContainer
                 .setBarBackgroundColor(R.color.blue_f)
                 .setActiveColor(R.color.white_f)
-                .setInActiveColor(R.color.black_f)
-                .setMode(BottomNavigationBar.MODE_FIXED);
+                .setInActiveColor(R.color.black_f);
+                //.setMode(BottomNavigationBar.MODE_FIXED);
 
         bnbBottemContainer
                 .addItem(new BottomNavigationItem(R.mipmap.fragment_message_seclect, R.string.fragment_title_message)

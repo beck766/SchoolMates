@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.beck.helloschoolmate.R;
-import com.beck.helloschoolmate.activity.AddFriendActivity;
+import com.beck.helloschoolmate.activity.friend.AddFriendActivity;
 import com.beck.helloschoolmate.contract.AddFriSearchContract;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchRequest;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchResponse;
@@ -66,6 +66,11 @@ public class AddFriendSearchFragment extends MateBaseFragment<AddFriendActivity>
 
 
     @Override
+    public void requestError(String error) {
+        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void setPresenter(AddFriSearchContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -73,11 +78,6 @@ public class AddFriendSearchFragment extends MateBaseFragment<AddFriendActivity>
     @Override
     public AddFriSearchContract.Presenter getPresenter() {
         return presenter;
-    }
-
-    @Override
-    public void RequestError(String error) {
-        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

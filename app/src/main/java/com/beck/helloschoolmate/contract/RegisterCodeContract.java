@@ -12,7 +12,6 @@ import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeRequest;
 public interface RegisterCodeContract {
 
     interface View extends BaseView<RegisterCodeContract.Presenter> {
-        void RequestError(String error);
 
         void getCodeSuccess(boolean isSuccess);
 

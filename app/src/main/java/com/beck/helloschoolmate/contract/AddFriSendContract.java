@@ -11,9 +11,6 @@ import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendRequest
 public interface AddFriSendContract {
 
     interface View extends BaseView<AddFriSendContract.Presenter> {
-
-        void RequestError(String error);
-
         void searchSuccess();
     }
 

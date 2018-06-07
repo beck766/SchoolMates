@@ -4,6 +4,7 @@ import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchRequest;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchResponse;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendRequest;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendResponse;
+import com.beck.helloschoolmate.model.http.entity.friend.NewFriendResponse;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeResponse;
 import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
@@ -73,7 +74,7 @@ public interface MatesService {
     Observable<AddFriSearchResponse> addFriendSearch(@Query("accessToken") String accessToken, @Body AddFriSearchRequest addFriSearchRequest);
 
     /**
-     * 查找好友
+     * 添加好友
      *
      * @param accessToken
      * @param addFriendSendRequest
@@ -82,4 +83,12 @@ public interface MatesService {
     @POST("friend/request/add/")
     Observable<AddFriendSendResponse> addFriendSend(@Query("accessToken") String accessToken, @Body AddFriendSendRequest addFriendSendRequest);
 
+    /**
+     * 查看新好友
+     *
+     * @param accessToken
+     * @return
+     */
+    @POST("friend/list/request/")
+    Observable<NewFriendResponse> newFriendCheck(@Query("accessToken") String accessToken);
 }

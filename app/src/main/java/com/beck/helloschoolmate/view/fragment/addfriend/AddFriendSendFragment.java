@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.beck.helloschoolmate.R;
-import com.beck.helloschoolmate.activity.AddFriendActivity;
+import com.beck.helloschoolmate.activity.friend.AddFriendActivity;
 import com.beck.helloschoolmate.contract.AddFriSendContract;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendRequest;
 import com.beck.helloschoolmate.util.UIUtil;
@@ -34,7 +34,7 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
     @BindView(R.id.et_add_send_remark)
     EditText etAddSendRemark;
     Unbinder unbinder;
-    private String send_userId;
+    private int send_userId;
     private AddFriSendContract.Presenter presenter;
 
     public static AddFriendSendFragment newInstance() {
@@ -52,7 +52,8 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        send_userId = getArguments().getString("addFriendSend_userId");
+        mActivity.setToolbarBackTitle("添加好友");
+        send_userId = getArguments().getInt("addFriendSend_userId");
         Log.i(TAG, "onViewCreated: userId=" + send_userId);
     }
 
@@ -66,11 +67,16 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
     @OnClick(R.id.btn_add_send)
     public void onViewClicked() {
         AddFriendSendRequest addFriendSendRequest = new AddFriendSendRequest();
-        addFriendSendRequest.setToUserId(Integer.parseInt(send_userId));
+        addFriendSendRequest.setToUserId(send_userId);
         addFriendSendRequest.setFriendGroupId(0);
         addFriendSendRequest.setMessage(etAddSendVerfiy.getText().toString().trim());
         addFriendSendRequest.setRemarkName(etAddSendRemark.getText().toString().trim());
         presenter.send(addFriendSendRequest);
+    }
+
+    @Override
+    public void requestError(String error) {
+        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -81,11 +87,6 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
     @Override
     public AddFriSendContract.Presenter getPresenter() {
         return presenter;
-    }
-
-    @Override
-    public void RequestError(String error) {
-        Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
