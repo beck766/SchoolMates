@@ -4,7 +4,11 @@ import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchRequest;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriSearchResponse;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendRequest;
 import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendResponse;
-import com.beck.helloschoolmate.model.http.entity.friend.NewFriendResponse;
+import com.beck.helloschoolmate.model.http.entity.friend.FriendListRequest;
+import com.beck.helloschoolmate.model.http.entity.friend.FriendResponse;
+import com.beck.helloschoolmate.model.http.entity.friend.NewFriAgreeRequest;
+import com.beck.helloschoolmate.model.http.entity.friend.NewFriAgreeResponse;
+import com.beck.helloschoolmate.model.http.entity.friend.NewFriCheckResponse;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.user.GetCodeResponse;
 import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
@@ -90,5 +94,25 @@ public interface MatesService {
      * @return
      */
     @POST("friend/list/request/")
-    Observable<NewFriendResponse> newFriendCheck(@Query("accessToken") String accessToken);
+    Observable<NewFriCheckResponse> newFriendCheck(@Query("accessToken") String accessToken);
+
+    /**
+     * 获取好友列表
+     *
+     * @param accessToken
+     * @param newFriAgreeRequest
+     * @return
+     */
+    @POST("friend/request/agree/")
+    Observable<NewFriAgreeResponse> newFriendAgree(@Query("accessToken") String accessToken, @Body NewFriAgreeRequest newFriAgreeRequest);
+
+    /**
+     * 查看分组好友列表
+     *
+     * @param accessToken
+     * @param friendListRequest
+     * @return
+     */
+    @POST("friend/list/friend_group/")
+    Observable<FriendResponse> friendList(@Query("accessToken") String accessToken, @Body FriendListRequest friendListRequest);
 }

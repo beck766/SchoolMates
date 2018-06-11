@@ -17,7 +17,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.beck.base.activity.BaseActivity;
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.friend.AddFriendActivity;
-import com.beck.helloschoolmate.view.fragment.HomeBaseFragment;
+import com.beck.helloschoolmate.presenter.FriendListPresenter;
 import com.beck.helloschoolmate.view.fragment.homepage.DiscoverFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.LinkmanFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.MapFragment;
@@ -37,7 +37,11 @@ import butterknife.OnClick;
 public class HomePageActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
 
     private static final String TAG = "HomePageActivity";
-    private HomeBaseFragment discoverFragment, linkmanFragment, mapFragment, messageFragment, stateFragment;
+    private DiscoverFragment discoverFragment;
+    private LinkmanFragment linkmanFragment;
+    private MapFragment mapFragment;
+    private MessageFragment messageFragment;
+    private StateFragment stateFragment;
     private Fragment mFragment;
 
     @BindView(R.id.bnb_bottem_container)
@@ -84,7 +88,7 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
                 .setBarBackgroundColor(R.color.blue_f)
                 .setActiveColor(R.color.white_f)
                 .setInActiveColor(R.color.black_f);
-                //.setMode(BottomNavigationBar.MODE_FIXED);
+        //.setMode(BottomNavigationBar.MODE_FIXED);
 
         bnbBottemContainer
                 .addItem(new BottomNavigationItem(R.mipmap.fragment_message_seclect, R.string.fragment_title_message)
@@ -137,6 +141,7 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
             case 1:
                 if (linkmanFragment == null) {
                     linkmanFragment = LinkmanFragment.newInstance();
+                    new FriendListPresenter(this, linkmanFragment);
                 }
                 switchFragment(linkmanFragment);
                 tvTitle.setText(R.string.fragment_title_linkman);

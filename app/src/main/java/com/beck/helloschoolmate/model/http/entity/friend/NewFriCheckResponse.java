@@ -6,7 +6,7 @@ import java.util.List;
  * Created by beck on 2018/6/7.
  */
 
-public class NewFriendResponse {
+public class NewFriCheckResponse {
 
     /**
      * success : true

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.friend.CheckNewFriActivity;
 import com.beck.helloschoolmate.contract.NewFriCheckContract;
-import com.beck.helloschoolmate.model.http.entity.friend.NewFriendResponse;
+import com.beck.helloschoolmate.model.http.entity.friend.NewFriCheckResponse;
 import com.beck.helloschoolmate.view.adapter.NewFriendAdapter;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 
@@ -75,11 +75,11 @@ public class NewFriCheckFragment extends MateBaseFragment<CheckNewFriActivity> i
     }
 
     @Override
-    public void requestSuccess(NewFriendResponse newFriendResponse) {
+    public void requestSuccess(NewFriCheckResponse newFriCheckResponse) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rcvNewFriendCheck.setLayoutManager(layoutManager);
         rcvNewFriendCheck.setItemAnimator(new DefaultItemAnimator());
-        NewFriendAdapter newFriendAdapter = new NewFriendAdapter(this.getContext(), newFriendResponse.getResult());
+        NewFriendAdapter newFriendAdapter = new NewFriendAdapter(this.getContext(), newFriCheckResponse.getResult());
         rcvNewFriendCheck.setAdapter(newFriendAdapter);
     }
 }

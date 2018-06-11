@@ -5,7 +5,7 @@ import android.content.Context;
 import com.beck.base.util.NetworkUtils;
 import com.beck.helloschoolmate.model.http.ApiClient;
 import com.beck.helloschoolmate.model.http.ApiConstants;
-import com.beck.helloschoolmate.model.http.entity.friend.NewFriendResponse;
+import com.beck.helloschoolmate.model.http.entity.friend.NewFriCheckResponse;
 import com.beck.helloschoolmate.model.http.service.MatesService;
 
 import io.reactivex.Emitter;
@@ -17,13 +17,13 @@ import io.reactivex.Observable;
 
 public class NewFriCheckRepository {
 
-    public Observable<NewFriendResponse> getNewFriResponse(Context context, String userToken) {
+    public Observable<NewFriCheckResponse> getNewFriResponse(Context context, String userToken) {
 
         if (!NetworkUtils.isNetworkConnected(context)) {
             return Observable.create(Emitter::onComplete);
         }
 
-        Observable<NewFriendResponse> newFriendResponseObservable = ApiClient.initMatesService(ApiConstants.MATE_HOST, MatesService.class).newFriendCheck(userToken);
+        Observable<NewFriCheckResponse> newFriendResponseObservable = ApiClient.initMatesService(ApiConstants.MATE_HOST, MatesService.class).newFriendCheck(userToken);
 
         assert newFriendResponseObservable != null;
 

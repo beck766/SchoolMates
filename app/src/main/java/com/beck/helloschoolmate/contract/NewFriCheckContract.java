@@ -2,7 +2,7 @@ package com.beck.helloschoolmate.contract;
 
 import com.beck.base.presenter.BasePresenter;
 import com.beck.base.view.BaseView;
-import com.beck.helloschoolmate.model.http.entity.friend.NewFriendResponse;
+import com.beck.helloschoolmate.model.http.entity.friend.NewFriCheckResponse;
 
 /**
  * Created by beck on 2018/6/7.
@@ -11,7 +11,7 @@ import com.beck.helloschoolmate.model.http.entity.friend.NewFriendResponse;
 public interface NewFriCheckContract {
     interface View extends BaseView<NewFriCheckContract.Presenter> {
 
-        void requestSuccess(NewFriendResponse newFriendResponse);
+        void requestSuccess(NewFriCheckResponse newFriCheckResponse);
     }
 
     interface Presenter extends BasePresenter {
