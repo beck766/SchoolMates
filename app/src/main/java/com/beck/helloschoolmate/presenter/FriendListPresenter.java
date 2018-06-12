@@ -2,7 +2,6 @@ package com.beck.helloschoolmate.presenter;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.beck.helloschoolmate.contract.FriendListContract;
 import com.beck.helloschoolmate.model.http.entity.friend.FriendListRequest;
@@ -41,7 +40,7 @@ public class FriendListPresenter implements FriendListContract.Presenter {
         FriendListRequest friendListRequest = new FriendListRequest();
         friendListRequest.setFriendGroupId(0);
         new FriendListRepository().getFriendList(context, userToken, friendListRequest)
-                .unsubscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<FriendResponse>() {
                     @Override
@@ -50,7 +49,7 @@ public class FriendListPresenter implements FriendListContract.Presenter {
                             List<FriendResponse.ResultBean> result = friendResponse.getResult();
                             view.displayFriList(result);
                         }else {
-                            Toast.makeText(context, "请求出错！", Toast.LENGTH_SHORT).show();
+                            view.requestError(friendResponse.getErrorMsg());
                         }
                     }
 

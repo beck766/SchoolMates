@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +35,7 @@ import butterknife.OnClick;
 
 public class LinkmanFragment extends HomeBaseFragment implements FriendListContract.View {
 
+    private static final String TAG = "LinkmanFragment";
     private FriendListContract.Presenter presenter;
     @BindView(R.id.rcv_linkman_friend)
     RecyclerView rcvLinkmanFriend;
@@ -102,10 +106,19 @@ public class LinkmanFragment extends HomeBaseFragment implements FriendListContr
 
     @Override
     public void displayFriList(List<FriendResponse.ResultBean> result) {
+        Log.i(TAG, "displayFriList: "+result.size());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rcvLinkmanFriend.setLayoutManager(layoutManager);
         rcvLinkmanFriend.setItemAnimator(new DefaultItemAnimator());
+        rcvLinkmanFriend.addItemDecoration(new DividerItemDecoration(this.getContext(),DividerItemDecoration.VERTICAL));
         MyFriendAdapter myFriendAdapter = new MyFriendAdapter(this.getContext(), result);
+        myFriendAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(activity, "打开聊天页面", Toast.LENGTH_SHORT).show();
+            }
+        });
         rcvLinkmanFriend.setAdapter(myFriendAdapter);
+
     }
 }

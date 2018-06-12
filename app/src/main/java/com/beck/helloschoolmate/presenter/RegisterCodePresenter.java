@@ -66,7 +66,7 @@ public class RegisterCodePresenter implements RegisterCodeContract.Presenter {
                             Log.i(TAG, "onNext: "+userToken);
                             view.getCodeSuccess(true);
                         } else {
-                            view.requestError(false + "");
+                            view.requestError(getCodeResponse.getErrorMsg());
                             Log.i(TAG, "onNext: 注册失败");
                         }
                     }

@@ -42,7 +42,8 @@ public class NewFriCheckPresenter implements NewFriCheckContract.Presenter {
                         if (newFriCheckResponse != null && newFriCheckResponse.isSuccess()) {
                             view.requestSuccess(newFriCheckResponse);
                         } else {
-                            view.requestError("请求出错");
+                            assert newFriCheckResponse != null;
+                            view.requestError(newFriCheckResponse.getErrorMsg());
                         }
                     }
 

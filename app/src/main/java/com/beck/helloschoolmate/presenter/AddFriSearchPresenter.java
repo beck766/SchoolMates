@@ -60,7 +60,7 @@ public class AddFriSearchPresenter implements AddFriSearchContract.Presenter {
                         if (addFriSearchResponse.isSuccess()) {
                             view.searchSuccess(addFriSearchResponse);
                         } else {
-                            view.requestError("账号不存在");
+                            view.requestError(addFriSearchResponse.getErrorMsg());
                         }
                     }
 

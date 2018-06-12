@@ -59,7 +59,7 @@ public class RegisterPasswordPresenter implements RegisterPasswordContract.Prese
                         if (registerResponse.isSuccess()) {
                             view.registerSuccess();
                         } else {
-                            view.requestError("注册失败");
+                            view.requestError(registerResponse.getErrorMsg());
                         }
                     }
 

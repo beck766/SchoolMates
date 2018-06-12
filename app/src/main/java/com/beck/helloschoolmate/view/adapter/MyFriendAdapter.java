@@ -2,6 +2,7 @@ package com.beck.helloschoolmate.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +25,18 @@ import butterknife.ButterKnife;
 
 public class MyFriendAdapter extends BaseRecyclerViewAdapter<MyFriendAdapter.ViewHolder> {
 
+    private static final String TAG = "MyFriendAdapter";
     private Context context;
     private List<FriendResponse.ResultBean> resultBeanList;
 
     public MyFriendAdapter(Context context, List<FriendResponse.ResultBean> resultBean) {
         this.context = context;
         this.resultBeanList = resultBean;
+        Log.i(TAG, "MyFriendAdapter: " + resultBeanList.size());
+        for (int i = 0; i < resultBeanList.size(); i++) {
+            Log.i(TAG, "MyFriendAdapter: 好友账号=" + resultBeanList.get(i).getFriendId());
+            Log.i(TAG, "MyFriendAdapter: 好友昵称=" + resultBeanList.get(i).getFriendName());
+        }
     }
 
     @Override
@@ -41,13 +48,17 @@ public class MyFriendAdapter extends BaseRecyclerViewAdapter<MyFriendAdapter.Vie
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         FriendResponse.ResultBean resultBean = resultBeanList.get(position);
+        Log.i(TAG, "onBindViewHolder: " + resultBeanList.get(position).getFriendIcon());
         Glide.with(context).load(resultBean.getFriendIcon()).error(R.mipmap.user_icon).into(holder.civFriend);
-        holder.tvLinkmanRemarkName.setText(resultBean.getFriendName());
+        if (resultBean.getFriendName() != null) {
+            holder.tvLinkmanRemarkName.setText(resultBean.getFriendName());
+        }
         holder.tvLinkmanSignature.setText("4G在线");
     }
 
     @Override
     public int getItemCount() {
+        Log.i(TAG, "getItemCount: "+resultBeanList.size());
         return resultBeanList != null ? resultBeanList.size() : 0;
     }
 

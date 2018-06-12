@@ -64,7 +64,11 @@ public class LoginPresenter implements LoginContract.Presenter {
                     @Override
                     public void onNext(LoginResponse loginResponse) {
                         Log.i(TAG, "onNext: " + loginResponse);
-                        view.loginSuccess(loginResponse);
+                        if (loginResponse.isSuccess()){
+                            view.loginSuccess(loginResponse);
+                        }else {
+                            view.requestError(loginResponse.getErrorMsg());
+                        }
                     }
 
                     @Override

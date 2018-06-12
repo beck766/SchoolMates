@@ -59,7 +59,7 @@ public class AddFriSendPresenter implements AddFriSendContract.Presenter{
                         if (addFriendSendResponse.isSuccess()) {
                             view.searchSuccess();
                         } else {
-                            view.requestError("账号不存在");
+                            view.requestError(addFriendSendResponse.getErrorMsg());
                         }
                     }
 

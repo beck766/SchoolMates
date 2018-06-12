@@ -61,6 +61,7 @@ public class NewFriendAdapter extends BaseRecyclerViewAdapter<NewFriendAdapter.V
                         public void onNext(NewFriAgreeResponse newFriAgreeResponse) {
                             if (newFriAgreeResponse != null && newFriAgreeResponse.isSuccess()) {
                                 Log.i(TAG, "onNext: 已同意");
+                                Toast.makeText(context, "已经同意添加好友", Toast.LENGTH_SHORT).show();
                                 notifyItemChanged(position);
                             }else {
                                 Toast.makeText(context, "请求出错", Toast.LENGTH_SHORT).show();
