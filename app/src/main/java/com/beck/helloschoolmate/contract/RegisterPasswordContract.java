@@ -2,7 +2,7 @@ package com.beck.helloschoolmate.contract;
 
 import com.beck.base.presenter.BasePresenter;
 import com.beck.base.view.BaseView;
-import com.beck.helloschoolmate.model.http.entity.user.RegisterRequest;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
 
 /**
  * Created by beck on 2018/5/30.

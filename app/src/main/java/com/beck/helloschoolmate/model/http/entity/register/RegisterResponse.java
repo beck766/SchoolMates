@@ -1,10 +1,10 @@
-package com.beck.helloschoolmate.model.http.entity.user;
+package com.beck.helloschoolmate.model.http.entity.register;
 
 /**
- * Created by beck on 2018/5/22.
+ * Created by beck on 2018/5/30.
  */
 
-public class LoginResponse {
+public class RegisterResponse {
 
     /**
      * success : true
@@ -12,7 +12,7 @@ public class LoginResponse {
      * errorCode : 0
      * resultCount : null
      * errorCount : null
-     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1MjY5NzUxMDcsInVzZXJJZCI6MSwiaWF0IjoxNTI2OTcxNTA3fQ.ETJ-FVGvxd_t0XG-Zsney5Fl9rA6EFxVyQUlaxvMYiY"}
+     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1Mjc2NDk4NjMsInVzZXJJZCI6NCwiaWF0IjoxNTI3NjQ2MjYzfQ.VWKwZBfRDhn6mf-BBZDU4UQzuGVJsKMv2ex_zlyiNis","thumbHeadImg":null,"userId":4}
      * results : null
      */
 
@@ -82,10 +82,14 @@ public class LoginResponse {
 
     public static class ResultBean {
         /**
-         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1MjY5NzUxMDcsInVzZXJJZCI6MSwiaWF0IjoxNTI2OTcxNTA3fQ.ETJ-FVGvxd_t0XG-Zsney5Fl9rA6EFxVyQUlaxvMYiY
+         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1Mjc2NDk4NjMsInVzZXJJZCI6NCwiaWF0IjoxNTI3NjQ2MjYzfQ.VWKwZBfRDhn6mf-BBZDU4UQzuGVJsKMv2ex_zlyiNis
+         * thumbHeadImg : null
+         * userId : 4
          */
 
         private String userToken;
+        private Object thumbHeadImg;
+        private int userId;
 
         public String getUserToken() {
             return userToken;
@@ -93,6 +97,22 @@ public class LoginResponse {
 
         public void setUserToken(String userToken) {
             this.userToken = userToken;
+        }
+
+        public Object getThumbHeadImg() {
+            return thumbHeadImg;
+        }
+
+        public void setThumbHeadImg(Object thumbHeadImg) {
+            this.thumbHeadImg = thumbHeadImg;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
         }
     }
 }

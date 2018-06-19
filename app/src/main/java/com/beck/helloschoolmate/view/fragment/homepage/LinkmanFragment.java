@@ -3,6 +3,7 @@ package com.beck.helloschoolmate.view.fragment.homepage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,7 @@ import butterknife.OnClick;
 public class LinkmanFragment extends HomeBaseFragment implements FriendListContract.View {
 
     private static final String TAG = "LinkmanFragment";
+
     private FriendListContract.Presenter presenter;
     @BindView(R.id.rcv_linkman_friend)
     RecyclerView rcvLinkmanFriend;
@@ -45,6 +47,9 @@ public class LinkmanFragment extends HomeBaseFragment implements FriendListContr
 
     @BindView(R.id.tv_linkman_search)
     TextView tvLinkmanSearch;
+
+    @BindView(R.id.srl_linkman_friend)
+    SwipeRefreshLayout srlLinkmanFriend;
 
     public static LinkmanFragment newInstance() {
         return new LinkmanFragment();
@@ -60,6 +65,16 @@ public class LinkmanFragment extends HomeBaseFragment implements FriendListContr
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        srlLinkmanFriend.setProgressViewOffset(true,50,200);
+        srlLinkmanFriend.setSize(SwipeRefreshLayout.DEFAULT);//下拉圆圈大小
+        srlLinkmanFriend.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
+        srlLinkmanFriend.setOnRefreshListener(() -> presenter.subscribe());
+
         presenter.subscribe();
     }
 
@@ -106,11 +121,12 @@ public class LinkmanFragment extends HomeBaseFragment implements FriendListContr
 
     @Override
     public void displayFriList(List<FriendResponse.ResultBean> result) {
-        Log.i(TAG, "displayFriList: "+result.size());
+        Log.i(TAG, "displayFriList: " + result.size());
+        srlLinkmanFriend.setRefreshing(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rcvLinkmanFriend.setLayoutManager(layoutManager);
         rcvLinkmanFriend.setItemAnimator(new DefaultItemAnimator());
-        rcvLinkmanFriend.addItemDecoration(new DividerItemDecoration(this.getContext(),DividerItemDecoration.VERTICAL));
+        rcvLinkmanFriend.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL));
         MyFriendAdapter myFriendAdapter = new MyFriendAdapter(this.getContext(), result);
         myFriendAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

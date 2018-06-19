@@ -2,8 +2,8 @@ package com.beck.helloschoolmate.contract;
 
 import com.beck.base.presenter.BasePresenter;
 import com.beck.base.view.BaseView;
-import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
-import com.beck.helloschoolmate.model.http.entity.user.LoginResponse;
+import com.beck.helloschoolmate.model.http.entity.login.LoginRequest;
+import com.beck.helloschoolmate.model.http.entity.login.LoginResponse;
 import com.beck.helloschoolmate.model.preference.entity.LoginUserInfo;
 
 /**

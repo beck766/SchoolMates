@@ -9,14 +9,15 @@ import com.beck.helloschoolmate.model.http.entity.friend.FriendResponse;
 import com.beck.helloschoolmate.model.http.entity.friend.NewFriAgreeRequest;
 import com.beck.helloschoolmate.model.http.entity.friend.NewFriAgreeResponse;
 import com.beck.helloschoolmate.model.http.entity.friend.NewFriCheckResponse;
-import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
-import com.beck.helloschoolmate.model.http.entity.user.GetCodeResponse;
-import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
-import com.beck.helloschoolmate.model.http.entity.user.LoginResponse;
-import com.beck.helloschoolmate.model.http.entity.user.RegisterRequest;
-import com.beck.helloschoolmate.model.http.entity.user.RegisterResponse;
-import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeRequest;
-import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeResponse;
+import com.beck.helloschoolmate.model.http.entity.register.GetCodeRequest;
+import com.beck.helloschoolmate.model.http.entity.register.GetCodeResponse;
+import com.beck.helloschoolmate.model.http.entity.login.LoginRequest;
+import com.beck.helloschoolmate.model.http.entity.login.LoginResponse;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterResponse;
+import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeRequest;
+import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeResponse;
+import com.beck.helloschoolmate.model.http.entity.userinfo.MyInfoResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -54,7 +55,7 @@ public interface MatesService {
      * @param verfiyCodeRequest
      * @return
      */
-    @POST("user/captcha/checkout/")
+    @POST("user/checkout/captcha/")
     Observable<VerfiyCodeResponse> verfiyCode(@Query("accessToken") String accessToken, @Body VerfiyCodeRequest verfiyCodeRequest);
 
     /**
@@ -115,4 +116,13 @@ public interface MatesService {
      */
     @POST("friend/list/friend_group/")
     Observable<FriendResponse> friendList(@Query("accessToken") String accessToken, @Body FriendListRequest friendListRequest);
+
+    /**
+     * 查看自己资料
+     *
+     * @param accessToken
+     * @return
+     */
+    @POST("user/info/self/")
+    Observable<MyInfoResponse> myInfo(@Query("accessToken") String accessToken);
 }

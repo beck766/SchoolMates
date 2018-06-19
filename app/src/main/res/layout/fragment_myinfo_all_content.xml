@@ -9,25 +9,35 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/rl_search_header"
+            android:id="@+id/rl_myInfo_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green_a">
+            android:layout_height="120dp"
+            android:background="@color/white_e">
 
             <com.beck.helloschoolmate.view.widget.CircleImageView
-                android:id="@+id/civ_search_icon"
+                android:id="@+id/civ_myInfo_icon"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/x10"
                 android:src="@mipmap/user_icon" />
 
+            <TextView
+                android:id="@+id/tv_myInfo_remarkName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_23"
+                android:layout_below="@+id/civ_myInfo_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/x15"
+                android:text="山草木绿"/>
+
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rl_search_header"
+            android:layout_below="@+id/rl_myInfo_header"
             android:layout_marginTop="@dimen/x10"
             android:background="@color/white_e"
             android:orientation="vertical">
@@ -48,7 +58,7 @@
                     android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:id="@+id/tv_search_num"
+                    android:id="@+id/tv_myInfo_num"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x120"
@@ -74,43 +84,12 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x8"
                     android:gravity="center_vertical"
-                    android:text="昵称:"
-                    android:textColor="@color/black_23"
-                    android:textSize="@dimen/x20" />
-
-                <TextView
-                    android:id="@+id/tv_search_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/x120"
-                    android:gravity="center_vertical"
-                    android:text="双木林"
-                    android:textColor="@color/black_e"
-                    android:textSize="@dimen/x20" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:background="@color/line" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white_f">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/x8"
-                    android:gravity="center_vertical"
                     android:text="性别:"
                     android:textColor="@color/black_23"
                     android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:id="@+id/tv_search_sex"
+                    android:id="@+id/tv_myInfo_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x120"
@@ -141,7 +120,7 @@
                     android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:id="@+id/tv_search_address"
+                    android:id="@+id/tv_myInfo_address"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x120"
@@ -172,7 +151,7 @@
                     android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:id="@+id/tv_search_homePlace"
+                    android:id="@+id/tv_myInfo_homePlace"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x120"
@@ -204,7 +183,7 @@
                     android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:id="@+id/tv_search_work"
+                    android:id="@+id/tv_myInfo_work"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x120"
@@ -236,7 +215,7 @@
                     android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:id="@+id/tv_search_hobby"
+                    android:id="@+id/tv_myInfo_hobby"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x120"
@@ -268,7 +247,7 @@
                     android:textSize="@dimen/x20" />
 
                 <TextView
-                    android:id="@+id/tv_search_signature"
+                    android:id="@+id/tv_myInfo_signature"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/x120"

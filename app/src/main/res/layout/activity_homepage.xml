@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.beck.helloschoolmate.activity.HomePageActivity">
 
-    <include layout="@layout/fragment_header" />
-
-    <FrameLayout
-        android:id="@+id/fragment_homepage"
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/bnb_bottem_container"
+        <include layout="@layout/fragment_header" />
+
+        <FrameLayout
+            android:id="@+id/fragment_homepage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
+            android:id="@+id/bnb_bottem_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nv_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/layout_menu_head"
+        app:menu="@menu/menu_drawer" />
+</android.support.v4.widget.DrawerLayout>

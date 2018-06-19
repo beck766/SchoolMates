@@ -3,9 +3,12 @@ package com.beck.helloschoolmate.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,6 +20,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.beck.base.activity.BaseActivity;
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.friend.AddFriendActivity;
+import com.beck.helloschoolmate.activity.userinfo.MyInformationActivity;
 import com.beck.helloschoolmate.presenter.FriendListPresenter;
 import com.beck.helloschoolmate.view.fragment.homepage.DiscoverFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.LinkmanFragment;
@@ -37,6 +41,7 @@ import butterknife.OnClick;
 public class HomePageActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
 
     private static final String TAG = "HomePageActivity";
+    private AddFriPopupWindow menuWindow;
     private DiscoverFragment discoverFragment;
     private LinkmanFragment linkmanFragment;
     private MapFragment mapFragment;
@@ -61,7 +66,12 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
 
     @BindView(R.id.iv_add)
     ImageView ivAdd;
-    private AddFriPopupWindow menuWindow;
+
+    @BindView(R.id.nv_layout)
+    NavigationView nvLayout;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +80,33 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
         ButterKnife.bind(this);
         changeStatusBarColor();
         initBottomNavigationBar();
+        initNavigationView();
         initFragment();
+    }
+
+    private void initNavigationView() {
+        nvLayout.setNavigationItemSelectedListener(item -> {
+            selectItem(item.getItemId());
+            return true;
+        });
+    }
+
+    private void selectItem(int itemId) {
+        switch (itemId){
+            case R.id.menu_userInfo:
+                Intent intent = new Intent(HomePageActivity.this, MyInformationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_setting:
+                break;
+            case R.id.menu_about:
+                break;
+            case R.id.menu_exit_login:
+                this.finish();
+                break;
+
+        }
+
     }
 
     private void changeStatusBarColor() {
@@ -225,8 +261,7 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_user_icon:
-                // TODO: 2018/5/21 点击头像右滑
-                this.finish();
+                drawerLayout.openDrawer(Gravity.START);
                 break;
             case R.id.iv_add:
                 menuWindow = new AddFriPopupWindow(this, onClickListener);
@@ -253,4 +288,5 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
             }
         }
     };
+
 }

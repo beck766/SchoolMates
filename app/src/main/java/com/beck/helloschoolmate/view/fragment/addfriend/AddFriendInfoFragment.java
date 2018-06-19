@@ -92,7 +92,7 @@ public class AddFriendInfoFragment extends MateBaseFragment<AddFriendActivity> {
             } else {
                 tvSearchSex.setText("保密");
             }
-            tvSearchAddress.setText("");
+            tvSearchAddress.setText(addFriSearchResponse.getResult().getArea());
             tvSearchHomePlace.setText(addFriSearchResponse.getResult().getHomeplace());
             tvSearchWork.setText(addFriSearchResponse.getResult().getIndustry());
             if (addFriSearchResponse.getResult().getHobbies() != null && addFriSearchResponse.getResult().getHobbies().size() > 0) {

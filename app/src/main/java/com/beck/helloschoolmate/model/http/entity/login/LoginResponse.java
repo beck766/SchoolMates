@@ -1,11 +1,10 @@
-package com.beck.helloschoolmate.model.http.entity.user;
+package com.beck.helloschoolmate.model.http.entity.login;
 
 /**
- * Created by beck on 2018/5/29.
+ * Created by beck on 2018/5/22.
  */
 
-public class GetCodeResponse {
-
+public class LoginResponse {
 
     /**
      * success : true
@@ -13,7 +12,7 @@ public class GetCodeResponse {
      * errorCode : 0
      * resultCount : null
      * errorCount : null
-     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJwaG9uZU51bWJlciI6IjE4MjcwODkyMzc4IiwiZXhwIjoxNTI4MTA1Mzg2LCJpYXQiOjE1MjgxMDE3ODZ9.CFHZyPMJ9kTl99Zn4XeNS58rHWxS2jOEtCpann6L6QU"}
+     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1MjY5NzUxMDcsInVzZXJJZCI6MSwiaWF0IjoxNTI2OTcxNTA3fQ.ETJ-FVGvxd_t0XG-Zsney5Fl9rA6EFxVyQUlaxvMYiY"}
      * results : null
      */
 
@@ -83,7 +82,7 @@ public class GetCodeResponse {
 
     public static class ResultBean {
         /**
-         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJwaG9uZU51bWJlciI6IjE4MjcwODkyMzc4IiwiZXhwIjoxNTI4MTA1Mzg2LCJpYXQiOjE1MjgxMDE3ODZ9.CFHZyPMJ9kTl99Zn4XeNS58rHWxS2jOEtCpann6L6QU
+         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1MjY5NzUxMDcsInVzZXJJZCI6MSwiaWF0IjoxNTI2OTcxNTA3fQ.ETJ-FVGvxd_t0XG-Zsney5Fl9rA6EFxVyQUlaxvMYiY
          */
 
         private String userToken;

@@ -14,10 +14,16 @@
         android:text="   好友通知"
         android:textColor="@color/black_33" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_newFriend_check"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_newFriend_check"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
-        android:scrollbars="none" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_newFriend_check"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

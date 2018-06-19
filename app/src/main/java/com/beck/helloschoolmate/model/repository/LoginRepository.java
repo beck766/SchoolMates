@@ -6,8 +6,8 @@ import android.util.Log;
 import com.beck.base.util.NetworkUtils;
 import com.beck.helloschoolmate.model.http.ApiClient;
 import com.beck.helloschoolmate.model.http.ApiConstants;
-import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
-import com.beck.helloschoolmate.model.http.entity.user.LoginResponse;
+import com.beck.helloschoolmate.model.http.entity.login.LoginRequest;
+import com.beck.helloschoolmate.model.http.entity.login.LoginResponse;
 import com.beck.helloschoolmate.model.http.service.MatesService;
 
 import io.reactivex.Emitter;

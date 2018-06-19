@@ -1,4 +1,4 @@
-package com.beck.helloschoolmate.model.http.entity.user;
+package com.beck.helloschoolmate.model.http.entity.login;
 
 /**
  * Created by beck on 2018/5/22.

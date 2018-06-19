@@ -2,6 +2,7 @@ package com.beck.helloschoolmate.view.fragment.newfriend;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,8 @@ public class NewFriCheckFragment extends MateBaseFragment<CheckNewFriActivity> i
 
     private static final String TAG = "NewFriCheckFragment";
     private NewFriCheckContract.Presenter presenter;
+    @BindView(R.id.srl_newFriend_check)
+    SwipeRefreshLayout srlNewFriendCheck;
 
     @BindView(R.id.rcv_newFriend_check)
     RecyclerView rcvNewFriendCheck;
@@ -50,6 +53,15 @@ public class NewFriCheckFragment extends MateBaseFragment<CheckNewFriActivity> i
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mActivity.setToolbarBackTitle("新朋友");
+        srlNewFriendCheck.setProgressViewOffset(true,50,200);
+        srlNewFriendCheck.setSize(SwipeRefreshLayout.DEFAULT);//下拉圆圈大小
+        srlNewFriendCheck.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
+        srlNewFriendCheck.setOnRefreshListener(() -> presenter.subscribe());
         presenter.subscribe();
     }
 
@@ -76,6 +88,7 @@ public class NewFriCheckFragment extends MateBaseFragment<CheckNewFriActivity> i
 
     @Override
     public void requestSuccess(NewFriCheckResponse newFriCheckResponse) {
+        srlNewFriendCheck.setRefreshing(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rcvNewFriendCheck.setLayoutManager(layoutManager);
         rcvNewFriendCheck.setItemAnimator(new DefaultItemAnimator());

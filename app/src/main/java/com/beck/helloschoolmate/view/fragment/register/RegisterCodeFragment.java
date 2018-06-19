@@ -17,8 +17,8 @@ import com.beck.base.util.NetworkUtils;
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.login.RegisterActivity;
 import com.beck.helloschoolmate.contract.RegisterCodeContract;
-import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
-import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeRequest;
+import com.beck.helloschoolmate.model.http.entity.register.GetCodeRequest;
+import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeRequest;
 import com.beck.helloschoolmate.presenter.RegisterPasswordPresenter;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 

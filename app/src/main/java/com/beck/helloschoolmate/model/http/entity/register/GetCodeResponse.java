@@ -1,10 +1,11 @@
-package com.beck.helloschoolmate.model.http.entity.user;
+package com.beck.helloschoolmate.model.http.entity.register;
 
 /**
- * Created by beck on 2018/5/30.
+ * Created by beck on 2018/5/29.
  */
 
-public class RegisterResponse {
+public class GetCodeResponse {
+
 
     /**
      * success : true
@@ -12,7 +13,7 @@ public class RegisterResponse {
      * errorCode : 0
      * resultCount : null
      * errorCount : null
-     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1Mjc2NDk4NjMsInVzZXJJZCI6NCwiaWF0IjoxNTI3NjQ2MjYzfQ.VWKwZBfRDhn6mf-BBZDU4UQzuGVJsKMv2ex_zlyiNis","thumbHeadImg":null,"userId":4}
+     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJwaG9uZU51bWJlciI6IjE4MjcwODkyMzc4IiwiZXhwIjoxNTI4MTA1Mzg2LCJpYXQiOjE1MjgxMDE3ODZ9.CFHZyPMJ9kTl99Zn4XeNS58rHWxS2jOEtCpann6L6QU"}
      * results : null
      */
 
@@ -82,14 +83,10 @@ public class RegisterResponse {
 
     public static class ResultBean {
         /**
-         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1Mjc2NDk4NjMsInVzZXJJZCI6NCwiaWF0IjoxNTI3NjQ2MjYzfQ.VWKwZBfRDhn6mf-BBZDU4UQzuGVJsKMv2ex_zlyiNis
-         * thumbHeadImg : null
-         * userId : 4
+         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJwaG9uZU51bWJlciI6IjE4MjcwODkyMzc4IiwiZXhwIjoxNTI4MTA1Mzg2LCJpYXQiOjE1MjgxMDE3ODZ9.CFHZyPMJ9kTl99Zn4XeNS58rHWxS2jOEtCpann6L6QU
          */
 
         private String userToken;
-        private Object thumbHeadImg;
-        private int userId;
 
         public String getUserToken() {
             return userToken;
@@ -97,22 +94,6 @@ public class RegisterResponse {
 
         public void setUserToken(String userToken) {
             this.userToken = userToken;
-        }
-
-        public Object getThumbHeadImg() {
-            return thumbHeadImg;
-        }
-
-        public void setThumbHeadImg(Object thumbHeadImg) {
-            this.thumbHeadImg = thumbHeadImg;
-        }
-
-        public int getUserId() {
-            return userId;
-        }
-
-        public void setUserId(int userId) {
-            this.userId = userId;
         }
     }
 }

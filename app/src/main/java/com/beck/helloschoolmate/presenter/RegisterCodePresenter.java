@@ -4,10 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.beck.helloschoolmate.contract.RegisterCodeContract;
-import com.beck.helloschoolmate.model.http.entity.user.GetCodeRequest;
-import com.beck.helloschoolmate.model.http.entity.user.GetCodeResponse;
-import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeRequest;
-import com.beck.helloschoolmate.model.http.entity.user.VerfiyCodeResponse;
+import com.beck.helloschoolmate.model.http.entity.register.GetCodeRequest;
+import com.beck.helloschoolmate.model.http.entity.register.GetCodeResponse;
+import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeRequest;
+import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeResponse;
 import com.beck.helloschoolmate.model.repository.RegisterCodeRepository;
 import com.beck.helloschoolmate.util.UserManager;
 

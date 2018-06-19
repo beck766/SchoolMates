@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.beck.helloschoolmate.contract.LoginContract;
-import com.beck.helloschoolmate.model.http.entity.user.LoginRequest;
-import com.beck.helloschoolmate.model.http.entity.user.LoginResponse;
+import com.beck.helloschoolmate.model.http.entity.login.LoginRequest;
+import com.beck.helloschoolmate.model.http.entity.login.LoginResponse;
 import com.beck.helloschoolmate.model.preference.entity.LoginUserInfo;
 import com.beck.helloschoolmate.model.repository.LoginRepository;
 import com.beck.helloschoolmate.util.UserManager;
@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by beck on 2018/5/22.
+ * LoginPresenter
  */
 
 public class LoginPresenter implements LoginContract.Presenter {

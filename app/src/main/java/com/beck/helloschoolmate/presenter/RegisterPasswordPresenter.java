@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.beck.helloschoolmate.contract.RegisterPasswordContract;
-import com.beck.helloschoolmate.model.http.entity.user.RegisterRequest;
-import com.beck.helloschoolmate.model.http.entity.user.RegisterResponse;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterResponse;
 import com.beck.helloschoolmate.model.repository.RegisterCompleteRepository;
 
 import java.net.SocketTimeoutException;
