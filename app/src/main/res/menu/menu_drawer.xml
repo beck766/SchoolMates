@@ -3,23 +3,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_userInfo"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/icon_menu_info"
             android:title="我的资料" />
         <item
             android:id="@+id/menu_setting"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/icon_menu_setting"
             android:title="通用设置" />
         <item
             android:id="@+id/menu_about"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/icon_menu_about"
             android:title="关于" />
         <item
             android:id="@+id/menu_help"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/icon_menu_help"
             android:title="使用帮助" />
         <item
             android:id="@+id/menu_exit_login"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/icon_menu_exit"
             android:title="退出登录" />
     </group>
 </menu>

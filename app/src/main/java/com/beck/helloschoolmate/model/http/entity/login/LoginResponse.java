@@ -12,7 +12,7 @@ public class LoginResponse {
      * errorCode : 0
      * resultCount : null
      * errorCount : null
-     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1MjY5NzUxMDcsInVzZXJJZCI6MSwiaWF0IjoxNTI2OTcxNTA3fQ.ETJ-FVGvxd_t0XG-Zsney5Fl9rA6EFxVyQUlaxvMYiY"}
+     * result : {"userToken":"eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1Mjk0ODIwNjcsInVzZXJJZCI6MSwiaWF0IjoxNTI5Mzk1NjY3fQ.1mDBCN4qZUk5Nw7deNnfu-VUGUfBBqzibKYVpOKmx6w","userIcon":"http://hongqian.f3322.net:2290/mates/api/icon/stu.jpg"}
      * results : null
      */
 
@@ -82,10 +82,12 @@ public class LoginResponse {
 
     public static class ResultBean {
         /**
-         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1MjY5NzUxMDcsInVzZXJJZCI6MSwiaWF0IjoxNTI2OTcxNTA3fQ.ETJ-FVGvxd_t0XG-Zsney5Fl9rA6EFxVyQUlaxvMYiY
+         * userToken : eyJ0eXAiOiIiLCJhbGciOiJIUzI1NiIsImNsZyI6IiJ9.eyJzdWIiOiIiLCJhdWQiOiIiLCJleHAiOjE1Mjk0ODIwNjcsInVzZXJJZCI6MSwiaWF0IjoxNTI5Mzk1NjY3fQ.1mDBCN4qZUk5Nw7deNnfu-VUGUfBBqzibKYVpOKmx6w
+         * userIcon : http://hongqian.f3322.net:2290/mates/api/icon/stu.jpg
          */
 
         private String userToken;
+        private String userIcon;
 
         public String getUserToken() {
             return userToken;
@@ -93,6 +95,14 @@ public class LoginResponse {
 
         public void setUserToken(String userToken) {
             this.userToken = userToken;
+        }
+
+        public String getUserIcon() {
+            return userIcon;
+        }
+
+        public void setUserIcon(String userIcon) {
+            this.userIcon = userIcon;
         }
     }
 }

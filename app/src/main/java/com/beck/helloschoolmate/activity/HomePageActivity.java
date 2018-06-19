@@ -29,6 +29,7 @@ import com.beck.helloschoolmate.view.fragment.homepage.MessageFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.StateFragment;
 import com.beck.helloschoolmate.view.widget.AddFriPopupWindow;
 import com.beck.helloschoolmate.view.widget.CircleImageView;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -104,9 +105,7 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
             case R.id.menu_exit_login:
                 this.finish();
                 break;
-
         }
-
     }
 
     private void changeStatusBarColor() {
@@ -158,8 +157,8 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
     }
 
     private void initUserIcon() {
-        // TODO: 2018/5/17 通过glide加载用户头像
-        ivUserIcon.setImageResource(R.mipmap.user_icon);
+        String userIcon = getIntent().getStringExtra("userIcon");
+        Glide.with(this).load(userIcon).error(R.mipmap.user_icon).into(ivUserIcon);
     }
 
 

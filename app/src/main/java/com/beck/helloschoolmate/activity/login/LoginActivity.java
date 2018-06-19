@@ -130,6 +130,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
         if (loginResponse.isSuccess()) {
             UserManager.getInstance().saveLoginUserInfo(this, phone,loginResponse.getResult().getUserToken());
             Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+            intent.putExtra("userIcon",loginResponse.getResult().getUserIcon());
             startActivity(intent);
         } else {
             Toast.makeText(this, loginResponse.getErrorMsg(), Toast.LENGTH_SHORT).show();
