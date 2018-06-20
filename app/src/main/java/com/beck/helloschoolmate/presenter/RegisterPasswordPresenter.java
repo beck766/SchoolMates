@@ -4,8 +4,11 @@ import android.content.Context;
 import android.util.Log;
 
 import com.beck.helloschoolmate.contract.RegisterPasswordContract;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterCheckRequest;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterCheckoutResponse;
 import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
 import com.beck.helloschoolmate.model.http.entity.register.RegisterResponse;
+import com.beck.helloschoolmate.model.repository.RegisterCheckoutRepository;
 import com.beck.helloschoolmate.model.repository.RegisterCompleteRepository;
 
 import java.net.SocketTimeoutException;
@@ -24,6 +27,7 @@ public class RegisterPasswordPresenter implements RegisterPasswordContract.Prese
     private static final String TAG = "RegisterPasswordPresent";
     private RegisterPasswordContract.View view;
     private Context context;
+    private DisposableObserver<RegisterCheckoutResponse> disposableObserver;
 
     public RegisterPasswordPresenter(Context context, RegisterPasswordContract.View view) {
         this.view = view;
@@ -60,6 +64,44 @@ public class RegisterPasswordPresenter implements RegisterPasswordContract.Prese
                             view.registerSuccess();
                         } else {
                             view.requestError(registerResponse.getErrorMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i(TAG, "onError: " + e.toString());
+                        if (e instanceof TimeoutException) {
+                            view.requestError("请求超时");
+                        } else if (e instanceof SocketTimeoutException) {
+                            view.requestError("请求超时");
+                        } else {
+                            view.requestError("服务器异常");
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void checkoutAccount(RegisterCheckRequest registerCheckRequest) {
+        if (disposableObserver != null) {
+            disposableObserver.dispose();
+        }
+        disposableObserver = new RegisterCheckoutRepository().checkoutAccount(context, registerCheckRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<RegisterCheckoutResponse>() {
+                    @Override
+                    public void onNext(RegisterCheckoutResponse registerCheckoutResponse) {
+                        Log.i(TAG, "onNext: 校验账号是否成功：" + registerCheckoutResponse.isSuccess());
+                        if (registerCheckoutResponse.isSuccess()) {
+                            view.checkDisplay("该账号可以使用！");
+                        } else {
+                            view.checkDisplayFalse(registerCheckoutResponse.getErrorMsg());
                         }
                     }
 

@@ -1,5 +1,6 @@
 package com.beck.helloschoolmate.view.fragment.addfriend;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
     Unbinder unbinder;
     private int send_userId;
     private AddFriSendContract.Presenter presenter;
+    private Dialog loadingDialog;
 
     public static AddFriendSendFragment newInstance() {
         return new AddFriendSendFragment();
@@ -72,10 +74,12 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
         addFriendSendRequest.setMessage(etAddSendVerfiy.getText().toString().trim());
         addFriendSendRequest.setRemarkName(etAddSendRemark.getText().toString().trim());
         presenter.send(addFriendSendRequest);
+        loadingDialog = UIUtil.createLoadingDialog(this.getContext(), "正在发送...");
     }
 
     @Override
     public void requestError(String error) {
+        UIUtil.closeDialog(loadingDialog);
         Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
@@ -91,6 +95,7 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
 
     @Override
     public void searchSuccess() {
+        UIUtil.closeDialog(loadingDialog);
         Toast.makeText(mActivity, "发送成功", Toast.LENGTH_SHORT).show();
         mActivity.finish();
     }

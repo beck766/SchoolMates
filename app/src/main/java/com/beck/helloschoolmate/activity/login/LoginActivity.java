@@ -1,6 +1,7 @@
 package com.beck.helloschoolmate.activity.login;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,6 +24,7 @@ import com.beck.helloschoolmate.model.http.entity.login.LoginRequest;
 import com.beck.helloschoolmate.model.http.entity.login.LoginResponse;
 import com.beck.helloschoolmate.model.preference.entity.LoginUserInfo;
 import com.beck.helloschoolmate.presenter.LoginPresenter;
+import com.beck.helloschoolmate.util.UIUtil;
 import com.beck.helloschoolmate.util.UserManager;
 
 import butterknife.BindView;
@@ -52,6 +54,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
 
     private String phone;
     private String password;
+    private Dialog loadingDialog;
 
     /*@BindView(R.id.pb_loading)
     ProgressBar pbLoading;*/
@@ -99,6 +102,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
                 loginRequest.setLoginType(0);
                 loginRequest.setCaptcha("");
                 presenter.getUerInfo(loginRequest);
+                loadingDialog = UIUtil.createLoadingDialog(this, "登录中...");
                 break;
             case R.id.tv_resetPsw:
                 // TODO: 2018/5/21  
@@ -112,6 +116,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
 
     @Override
     public void requestError(String error) {
+        UIUtil.closeDialog(loadingDialog);
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
@@ -127,6 +132,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
 
     @Override
     public void loginSuccess(LoginResponse loginResponse) {
+        UIUtil.closeDialog(loadingDialog);
         if (loginResponse.isSuccess()) {
             UserManager.getInstance().saveLoginUserInfo(this, phone,loginResponse.getResult().getUserToken());
             Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);

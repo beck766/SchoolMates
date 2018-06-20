@@ -101,7 +101,6 @@ public class RegisterPhoneNumFragment extends MateBaseFragment<RegisterActivity>
     }
 
     private void isVerify(String tel) {
-        // TODO: 2018/5/22 验证手机号是否存在
         RegisterCodeFragment registerCodeFragment = RegisterCodeFragment.newInstance();
         Bundle bundle = new Bundle();
         bundle.putString("tel", registerEtTel.getText().toString());

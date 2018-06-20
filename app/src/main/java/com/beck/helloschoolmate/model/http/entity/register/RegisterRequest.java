@@ -6,13 +6,32 @@ package com.beck.helloschoolmate.model.http.entity.register;
 
 public class RegisterRequest {
 
+
     /**
-     * password : string
-     * phoneNumber : 18270892378
+     * account : 15013809484
+     * nickName : 林
+     * password : 123456
      */
 
+    private String account;
+    private String nickName;
     private String password;
-    private String phoneNumber;
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public String getPassword() {
         return password;
@@ -20,13 +39,5 @@ public class RegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 }

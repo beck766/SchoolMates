@@ -1,6 +1,7 @@
 package com.beck.helloschoolmate.view.fragment.register;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -20,6 +21,7 @@ import com.beck.helloschoolmate.contract.RegisterCodeContract;
 import com.beck.helloschoolmate.model.http.entity.register.GetCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeRequest;
 import com.beck.helloschoolmate.presenter.RegisterPasswordPresenter;
+import com.beck.helloschoolmate.util.UIUtil;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 
 import butterknife.BindView;
@@ -40,7 +42,10 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
 
     @BindView(R.id.register_btn_next)
     Button registerBtnNext;
+    private boolean isHasGetCode;
     private String tel;
+    private Dialog loadingDialog;
+    private Dialog dialog;
 
     public static RegisterCodeFragment newInstance() {
         return new RegisterCodeFragment();
@@ -74,7 +79,9 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String code = registerEtVerifyCode.getText().toString();
             if (code.length() >= 6) {
-                registerBtnNext.setEnabled(true);
+                if (isHasGetCode) {
+                    registerBtnNext.setEnabled(true);
+                }
             } else {
                 registerBtnNext.setEnabled(false);
             }
@@ -98,6 +105,7 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
                 if (!NetworkUtils.isNetworkConnected(mActivity)) {
                     Toast.makeText(mActivity, "网络不稳定！", Toast.LENGTH_SHORT).show();
                 } else {
+                    loadingDialog = UIUtil.createLoadingDialog(this.getContext(), "正在获取...");
                     GetCodeRequest getCodeRequest = new GetCodeRequest();
                     getCodeRequest.setPhoneNumber(tel);
                     presenter.getVerfiyCode(getCodeRequest);
@@ -107,6 +115,7 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
                 if (!NetworkUtils.isNetworkConnected(mActivity)) {
                     Toast.makeText(mActivity, "网络不稳定！", Toast.LENGTH_SHORT).show();
                 } else {
+                    dialog = UIUtil.createLoadingDialog(this.getContext(), "正在验证...");
                     VerfiyCodeRequest verfiyCodeRequest = new VerfiyCodeRequest();
                     verfiyCodeRequest.setCaptcha(registerEtVerifyCode.getText().toString().trim());
                     presenter.verfiyCode(verfiyCodeRequest);
@@ -117,6 +126,8 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
 
     @Override
     public void requestError(String error) {
+        UIUtil.closeDialog(loadingDialog);
+        UIUtil.closeDialog(dialog);
         Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
@@ -132,7 +143,9 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
 
     @Override
     public void getCodeSuccess(boolean isSuccess) {
+        UIUtil.closeDialog(loadingDialog);
         if (isSuccess) {
+            isHasGetCode = true;
             Toast.makeText(mActivity, "获取成功", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(mActivity, "获取失败", Toast.LENGTH_SHORT).show();
@@ -141,12 +154,13 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
 
     @Override
     public void verfiySussess(String userToken) {
+        UIUtil.closeDialog(dialog);
         RegisterPasswordFragment registerPasswordFragment = RegisterPasswordFragment.newInstance();
         Bundle bundle = new Bundle();
-        bundle.putString("tel", tel);
-        bundle.putString("accessToken",userToken);
+        //bundle.putString("tel", tel);
+        bundle.putString("accessToken", userToken);
         registerPasswordFragment.setArguments(bundle);
         mActivity.setFragment(registerPasswordFragment, "register_password", true);
-        new RegisterPasswordPresenter(mActivity,registerPasswordFragment);
+        new RegisterPasswordPresenter(mActivity, registerPasswordFragment);
     }
 }

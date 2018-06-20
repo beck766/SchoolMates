@@ -9,10 +9,12 @@ import com.beck.helloschoolmate.model.http.entity.friend.FriendResponse;
 import com.beck.helloschoolmate.model.http.entity.friend.NewFriAgreeRequest;
 import com.beck.helloschoolmate.model.http.entity.friend.NewFriAgreeResponse;
 import com.beck.helloschoolmate.model.http.entity.friend.NewFriCheckResponse;
-import com.beck.helloschoolmate.model.http.entity.register.GetCodeRequest;
-import com.beck.helloschoolmate.model.http.entity.register.GetCodeResponse;
 import com.beck.helloschoolmate.model.http.entity.login.LoginRequest;
 import com.beck.helloschoolmate.model.http.entity.login.LoginResponse;
+import com.beck.helloschoolmate.model.http.entity.register.GetCodeRequest;
+import com.beck.helloschoolmate.model.http.entity.register.GetCodeResponse;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterCheckRequest;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterCheckoutResponse;
 import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
 import com.beck.helloschoolmate.model.http.entity.register.RegisterResponse;
 import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeRequest;
@@ -57,6 +59,15 @@ public interface MatesService {
      */
     @POST("user/checkout/captcha/")
     Observable<VerfiyCodeResponse> verfiyCode(@Query("accessToken") String accessToken, @Body VerfiyCodeRequest verfiyCodeRequest);
+
+    /**
+     * 验证账号是否存在
+     *
+     * @param registerCheckRequest
+     * @return
+     */
+    @POST("user/checkout/account/")
+    Observable<RegisterCheckoutResponse> checkAccount(@Body RegisterCheckRequest registerCheckRequest);
 
     /**
      * 完成注册

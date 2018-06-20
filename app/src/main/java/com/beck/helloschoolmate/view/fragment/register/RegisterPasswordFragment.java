@@ -1,6 +1,7 @@
 package com.beck.helloschoolmate.view.fragment.register;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -20,7 +21,9 @@ import com.beck.base.util.NetworkUtils;
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.login.RegisterActivity;
 import com.beck.helloschoolmate.contract.RegisterPasswordContract;
+import com.beck.helloschoolmate.model.http.entity.register.RegisterCheckRequest;
 import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
+import com.beck.helloschoolmate.util.UIUtil;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 
 import butterknife.BindView;
@@ -32,7 +35,7 @@ import butterknife.Unbinder;
  * Created by beck on 2018/5/21.
  */
 
-public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity> implements RegisterPasswordContract.View{
+public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity> implements RegisterPasswordContract.View {
 
     private static final String TAG = "RegisterPasswordFragment";
     private boolean registerPwdShow = false;
@@ -54,11 +57,21 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
 
     @BindView(R.id.register_complete)
     Button registerComplete;
+
+    @BindView(R.id.et_register_name)
+    EditText etRegisterName;
+
+    @BindView(R.id.et_register_account)
+    EditText etRegisterAccount;
+
+    @BindView(R.id.tv_account_error)
+    TextView tvAccountError;
     Unbinder unbinder;
     private String pwd;
     private String pwdEnsure;
-    private String tel;
     private String accessToken;
+    private Dialog loadingDialog;
+    private Dialog dialog;
 
     public static RegisterPasswordFragment newInstance() {
         return new RegisterPasswordFragment();
@@ -75,11 +88,22 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        RegisterCheckRequest registerCheckRequest = new RegisterCheckRequest();
         mActivity.setToolbarBackTitle("设置密码");
-        tel = getArguments().getString("tel");
+        pwd = "";
+        pwdEnsure = "";
+        //tel = getArguments().getString("tel");
         accessToken = getArguments().getString("accessToken");
         registerPwdReset.addTextChangedListener(textWatcher);
         registerPwdEnsure.addTextChangedListener(textWatcher);
+        etRegisterAccount.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+            } else {
+                registerCheckRequest.setAccount(etRegisterAccount.getText().toString().trim());
+                presenter.checkoutAccount(registerCheckRequest);
+                dialog = UIUtil.createLoadingDialog(this.getContext(), "验证中...");
+            }
+        });
     }
 
     @Override
@@ -91,7 +115,6 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @OnClick({R.id.register_pwd_reset_visibility, R.id.register_pwd_ensure_visibility, R.id.register_complete})
@@ -120,16 +143,21 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
                 }
                 break;
             case R.id.register_complete:
-                if (!pwd.equals(pwdEnsure)) {
+                if (pwd.length() < 6 || pwdEnsure.length() < 6) {
+                    pwdErrorSet.setVisibility(View.VISIBLE);
+                    pwdErrorSet.setText("密码长度不能小于6位");
+                } else if (!pwd.equals(pwdEnsure)) {
                     pwdErrorSet.setVisibility(View.VISIBLE);
                     pwdErrorSet.setText("两次输入的密码不一致");
                 } else if (!NetworkUtils.isNetworkConnected(mActivity)) {
                     Toast.makeText(mActivity, "网络不稳定！", Toast.LENGTH_SHORT).show();
                 } else {
                     RegisterRequest registerRequest = new RegisterRequest();
-                    registerRequest.setPhoneNumber(tel);
+                    registerRequest.setAccount(etRegisterAccount.getText().toString().trim());
+                    registerRequest.setNickName(etRegisterName.getText().toString().trim());
                     registerRequest.setPassword(pwd);
-                    presenter.register(accessToken,registerRequest);
+                    presenter.register(accessToken, registerRequest);
+                    loadingDialog = UIUtil.createLoadingDialog(this.getContext(), "正在注册...");
                     break;
                 }
         }
@@ -146,11 +174,11 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             pwd = registerPwdReset.getText().toString().trim();
             pwdEnsure = registerPwdEnsure.getText().toString().trim();
-            if (pwd.length() >= 6 && pwdEnsure.length() >= 6) {
+            /*if (pwd.length() >= 6 && pwdEnsure.length() >= 6) {
                 registerComplete.setEnabled(true);
             } else {
                 registerComplete.setEnabled(false);
-            }
+            }*/
         }
 
         @Override
@@ -161,12 +189,14 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
 
     @Override
     public void requestError(String error) {
+        UIUtil.closeDialog(loadingDialog);
+        UIUtil.closeDialog(dialog);
         Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setPresenter(RegisterPasswordContract.Presenter presenter) {
-        this.presenter=presenter;
+        this.presenter = presenter;
     }
 
     @Override
@@ -177,5 +207,22 @@ public class RegisterPasswordFragment extends MateBaseFragment<RegisterActivity>
     @Override
     public void registerSuccess() {
         mActivity.finish();
+        UIUtil.closeDialog(loadingDialog);
+    }
+
+    @Override
+    public void checkDisplay(String s) {
+        UIUtil.closeDialog(dialog);
+        registerComplete.setEnabled(true);
+        tvAccountError.setVisibility(View.VISIBLE);
+        tvAccountError.setText(s);
+    }
+
+    @Override
+    public void checkDisplayFalse(String errorMsg) {
+        UIUtil.closeDialog(dialog);
+        registerComplete.setEnabled(false);
+        tvAccountError.setVisibility(View.VISIBLE);
+        tvAccountError.setText(errorMsg);
     }
 }

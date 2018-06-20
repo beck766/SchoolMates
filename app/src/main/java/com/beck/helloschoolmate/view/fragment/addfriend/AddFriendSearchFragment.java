@@ -1,5 +1,6 @@
 package com.beck.helloschoolmate.view.fragment.addfriend;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class AddFriendSearchFragment extends MateBaseFragment<AddFriendActivity>
     private AddFriSearchContract.Presenter presenter;
     @BindView(R.id.et_search_fri)
     EditText etSearchFri;
+    private Dialog loadingDialog;
 
     public static AddFriendSearchFragment newInstance() {
         return new AddFriendSearchFragment();
@@ -60,6 +62,7 @@ public class AddFriendSearchFragment extends MateBaseFragment<AddFriendActivity>
         if (search_id.length() != 0) {
             AddFriSearchRequest addFriSearchRequest = new AddFriSearchRequest();
             addFriSearchRequest.setSearchParam(search_id);
+            loadingDialog = UIUtil.createLoadingDialog(this.getContext(), "正在查找...");
             presenter.search(addFriSearchRequest);
         }
     }
@@ -67,6 +70,7 @@ public class AddFriendSearchFragment extends MateBaseFragment<AddFriendActivity>
 
     @Override
     public void requestError(String error) {
+        UIUtil.closeDialog(loadingDialog);
         Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 
@@ -82,6 +86,7 @@ public class AddFriendSearchFragment extends MateBaseFragment<AddFriendActivity>
 
     @Override
     public void searchSuccess(AddFriSearchResponse addFriSearchResponse) {
+        UIUtil.closeDialog(loadingDialog);
         AddFriendInfoFragment addFriendInfoFragment = AddFriendInfoFragment.newInstance();
         Bundle bundle = new Bundle();
         bundle.putParcelable("addFriSearchResponse", addFriSearchResponse);

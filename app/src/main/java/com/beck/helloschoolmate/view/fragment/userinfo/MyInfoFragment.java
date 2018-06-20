@@ -1,16 +1,19 @@
 package com.beck.helloschoolmate.view.fragment.userinfo;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.userinfo.MyInformationActivity;
 import com.beck.helloschoolmate.contract.MyInfoAllContract;
 import com.beck.helloschoolmate.model.http.entity.userinfo.MyInfoResponse;
+import com.beck.helloschoolmate.util.UIUtil;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 import com.beck.helloschoolmate.view.widget.CircleImageView;
 import com.bumptech.glide.Glide;
@@ -54,6 +57,7 @@ public class MyInfoFragment extends MateBaseFragment<MyInformationActivity> impl
     @BindView(R.id.tv_myInfo_remarkName)
     TextView tvMyInfoRemarkName;
     Unbinder unbinder;
+    private Dialog loadingDialog;
 
     public static MyInfoFragment newInstance() {
         return new MyInfoFragment();
@@ -72,6 +76,7 @@ public class MyInfoFragment extends MateBaseFragment<MyInformationActivity> impl
         super.onViewCreated(view, savedInstanceState);
         mActivity.setToolbarBackTitle("");
         presenter.subscribe();
+        loadingDialog = UIUtil.createLoadingDialog(this.getContext(), "正在加载...");
     }
 
     @Override
@@ -93,7 +98,8 @@ public class MyInfoFragment extends MateBaseFragment<MyInformationActivity> impl
 
     @Override
     public void requestError(String error) {
-
+        Toast.makeText(this.getContext(), error, Toast.LENGTH_SHORT).show();
+        UIUtil.closeDialog(loadingDialog);
     }
 
     @Override
@@ -108,8 +114,15 @@ public class MyInfoFragment extends MateBaseFragment<MyInformationActivity> impl
 
     @Override
     public void displayMyInfo(MyInfoResponse.ResultBean result) {
+        UIUtil.closeDialog(loadingDialog);
         StringBuilder stringBuilder = new StringBuilder();
-        Glide.with(this.getContext()).load(result.getUserImgs().get(0)).error(R.mipmap.user_icon).into(civMyInfoIcon);
+        if (result.getUserImgs() != null) {
+            if (result.getUserImgs().size() > 0) {
+                Glide.with(this.getContext()).load(result.getUserImgs().get(0)).error(R.mipmap.user_icon).into(civMyInfoIcon);
+            }
+        } else {
+            Glide.with(this.getContext()).load(R.mipmap.user_icon).into(civMyInfoIcon);
+        }
         tvMyInfoRemarkName.setText(result.getNickName());
         tvMyInfoNum.setText(result.getAccount());
         tvMyInfoAddress.setText(result.getArea());
