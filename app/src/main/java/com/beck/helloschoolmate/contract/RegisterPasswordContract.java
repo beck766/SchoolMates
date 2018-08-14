@@ -7,6 +7,7 @@ import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
 
 /**
  * Created by beck on 2018/5/30.
+ *
  */
 
 public interface RegisterPasswordContract {

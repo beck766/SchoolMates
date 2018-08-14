@@ -45,18 +45,19 @@
                 android:maxLength="6"
                 android:textSize="15dp" />
 
-            <Button
-                android:id="@+id/register_btn_getVerfiyCode"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
+            <TextView
+                android:id="@+id/tv_regiter_get_code"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="3dp"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/btn_selected"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
+                android:background="@drawable/shape_textview_round"
+                android:gravity="center"
+                android:padding="5dp"
                 android:text="获取验证码"
-                android:textColor="#ffffff"
-                android:textSize="11dp" />
+                android:textColor="#15C46C" />
+
         </RelativeLayout>
 
         <Button

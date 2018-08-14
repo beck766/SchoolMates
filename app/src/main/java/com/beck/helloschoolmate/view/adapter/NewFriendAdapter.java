@@ -20,6 +20,7 @@ import com.beck.helloschoolmate.util.UserManager;
 import com.beck.helloschoolmate.view.widget.CircleImageView;
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,7 +38,7 @@ public class NewFriendAdapter extends BaseRecyclerViewAdapter<NewFriendAdapter.V
     private static final String TAG = "NewFriendAdapter";
     private Context context;
     public List<NewFriCheckResponse.ResultBean> newFriendBeans;
-
+    private List<Integer> friGroupRIds;
 
     public NewFriendAdapter(Context context, List<NewFriCheckResponse.ResultBean> newFriendBeans) {
         this.context = context;
@@ -50,10 +51,12 @@ public class NewFriendAdapter extends BaseRecyclerViewAdapter<NewFriendAdapter.V
         return new ViewHolder(view, (resultBean, position) -> {
             String userToken = UserManager.getInstance().getUserToken(context);
             NewFriAgreeRequest newFriAgreeRequest = new NewFriAgreeRequest();
-            newFriAgreeRequest.setFriendGroupId(0);
+            friGroupRIds = new ArrayList<>();
+            friGroupRIds.add(1);
+            newFriAgreeRequest.setUserFriendGroupRIds(friGroupRIds);
             newFriAgreeRequest.setFriendId(newFriendBeans.get(position).getRequesterId());
             newFriAgreeRequest.setRemarkName("");
-            new NewFriAgreeRepository().getNewFriAgreeResponse(context,userToken,newFriAgreeRequest)
+            new NewFriAgreeRepository().getNewFriAgreeResponse(context, userToken, newFriAgreeRequest)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new DisposableObserver<NewFriAgreeResponse>() {
@@ -63,11 +66,11 @@ public class NewFriendAdapter extends BaseRecyclerViewAdapter<NewFriendAdapter.V
                                 Log.i(TAG, "onNext: 已同意");
                                 Toast.makeText(context, "已经同意添加好友", Toast.LENGTH_SHORT).show();
                                 notifyItemChanged(position);
-                            }else {
+                            } else {
                                 Toast.makeText(context, "请求出错", Toast.LENGTH_SHORT).show();
                             }
                             assert newFriAgreeResponse != null;
-                            Log.i(TAG, "onNext: "+newFriAgreeResponse.getErrorMsg());
+                            Log.i(TAG, "onNext: " + newFriAgreeResponse.getErrorMsg());
                         }
 
                         @Override
@@ -104,7 +107,7 @@ public class NewFriendAdapter extends BaseRecyclerViewAdapter<NewFriendAdapter.V
 
     @Override
     public int getItemCount() {
-        return newFriendBeans != null ? newFriendBeans.size() : 0;
+        return newFriendBeans == null ? 0 : newFriendBeans.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -136,8 +139,8 @@ public class NewFriendAdapter extends BaseRecyclerViewAdapter<NewFriendAdapter.V
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_new_friend_agreed:
-                    Log.i(TAG, "onClick: 点击同意"+btnNewFriendAgreed.getTag());
-                    myViewHolderClicks.onFollowStatusChange((NewFriCheckResponse.ResultBean) btnNewFriendAgreed.getTag(),getLayoutPosition());
+                    Log.i(TAG, "onClick: 点击同意" + btnNewFriendAgreed.getTag());
+                    myViewHolderClicks.onFollowStatusChange((NewFriCheckResponse.ResultBean) btnNewFriendAgreed.getTag(), getLayoutPosition());
                     break;
                 default:
                     break;

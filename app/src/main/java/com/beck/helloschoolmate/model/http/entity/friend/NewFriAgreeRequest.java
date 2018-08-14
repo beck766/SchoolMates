@@ -1,5 +1,7 @@
 package com.beck.helloschoolmate.model.http.entity.friend;
 
+import java.util.List;
+
 /**
  * Created by beck on 2018/6/11.
  */
@@ -7,22 +9,14 @@ package com.beck.helloschoolmate.model.http.entity.friend;
 public class NewFriAgreeRequest {
 
     /**
-     * friendGroupId : 0
-     * friendId : 25
+     * friendId : 0
      * remarkName : string
+     * userFriendGroupRIds : [0]
      */
 
-    private int friendGroupId;
     private int friendId;
     private String remarkName;
-
-    public int getFriendGroupId() {
-        return friendGroupId;
-    }
-
-    public void setFriendGroupId(int friendGroupId) {
-        this.friendGroupId = friendGroupId;
-    }
+    private List<Integer> userFriendGroupRIds;
 
     public int getFriendId() {
         return friendId;
@@ -38,5 +32,13 @@ public class NewFriAgreeRequest {
 
     public void setRemarkName(String remarkName) {
         this.remarkName = remarkName;
+    }
+
+    public List<Integer> getUserFriendGroupRIds() {
+        return userFriendGroupRIds;
+    }
+
+    public void setUserFriendGroupRIds(List<Integer> userFriendGroupRIds) {
+        this.userFriendGroupRIds = userFriendGroupRIds;
     }
 }

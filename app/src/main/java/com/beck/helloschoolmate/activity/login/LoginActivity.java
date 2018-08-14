@@ -55,6 +55,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
     private String phone;
     private String password;
     private Dialog loadingDialog;
+    private LoginRequest loginRequest;
 
     /*@BindView(R.id.pb_loading)
     ProgressBar pbLoading;*/
@@ -74,6 +75,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
         cbDisplay.setOnCheckedChangeListener(this);
         etPhone.addTextChangedListener(textWatcher);
         etPwd.addTextChangedListener(textWatcher);
+        loginRequest = new LoginRequest();
     }
 
     @Override
@@ -96,16 +98,13 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_next:
-                LoginRequest loginRequest = new LoginRequest();
-                loginRequest.setPhoneNumber(phone);
+                loginRequest.setAccount(phone);
                 loginRequest.setPassword(password);
-                loginRequest.setLoginType(0);
-                loginRequest.setCaptcha("");
                 presenter.getUerInfo(loginRequest);
                 loadingDialog = UIUtil.createLoadingDialog(this, "登录中...");
                 break;
             case R.id.tv_resetPsw:
-                // TODO: 2018/5/21  
+                // TODO: 2018/5/21
                 break;
             case R.id.tv_register:
                 Intent intent2 = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -134,9 +133,9 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
     public void loginSuccess(LoginResponse loginResponse) {
         UIUtil.closeDialog(loadingDialog);
         if (loginResponse.isSuccess()) {
-            UserManager.getInstance().saveLoginUserInfo(this, phone,loginResponse.getResult().getUserToken());
+            UserManager.getInstance().saveLoginUserInfo(this, phone, loginResponse.getResult().getUserToken());
             Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-            intent.putExtra("userIcon",loginResponse.getResult().getUserIcon());
+            intent.putExtra("userIcon", loginResponse.getResult().getUserIcon());
             startActivity(intent);
         } else {
             Toast.makeText(this, loginResponse.getErrorMsg(), Toast.LENGTH_SHORT).show();
@@ -159,7 +158,7 @@ public class LoginActivity extends BaseActivity implements CompoundButton.OnChec
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             phone = etPhone.getText().toString().trim();
             password = etPwd.getText().toString().trim();
-            if (phone.length() >= 6 && !password.isEmpty()) {
+            if (!password.isEmpty()) {
                 btnNext.setEnabled(true);
             } else {
                 btnNext.setEnabled(false);

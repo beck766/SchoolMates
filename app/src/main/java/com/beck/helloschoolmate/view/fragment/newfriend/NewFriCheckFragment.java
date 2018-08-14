@@ -73,6 +73,7 @@ public class NewFriCheckFragment extends MateBaseFragment<CheckNewFriActivity> i
 
     @Override
     public void requestError(String error) {
+        srlNewFriendCheck.setRefreshing(false);
         Toast.makeText(mActivity, error, Toast.LENGTH_SHORT).show();
     }
 

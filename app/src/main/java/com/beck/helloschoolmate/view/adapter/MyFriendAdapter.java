@@ -58,8 +58,8 @@ public class MyFriendAdapter extends BaseRecyclerViewAdapter<MyFriendAdapter.Vie
 
     @Override
     public int getItemCount() {
-        Log.i(TAG, "getItemCount: "+resultBeanList.size());
-        return resultBeanList != null ? resultBeanList.size() : 0;
+        Log.i(TAG, "getItemCount: " + resultBeanList.size());
+        return resultBeanList == null ? 0 : resultBeanList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

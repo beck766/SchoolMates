@@ -19,6 +19,8 @@ import com.beck.helloschoolmate.model.http.entity.register.RegisterRequest;
 import com.beck.helloschoolmate.model.http.entity.register.RegisterResponse;
 import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeRequest;
 import com.beck.helloschoolmate.model.http.entity.register.VerfiyCodeResponse;
+import com.beck.helloschoolmate.model.http.entity.state.StateRequest;
+import com.beck.helloschoolmate.model.http.entity.state.StateResponse;
 import com.beck.helloschoolmate.model.http.entity.userinfo.MyInfoResponse;
 
 import io.reactivex.Observable;
@@ -38,7 +40,7 @@ public interface MatesService {
      * @param loginRequest
      * @return
      */
-    @POST("user/login/")
+    @POST("user/login/account")
     Observable<LoginResponse> getLoginInfo(@Body LoginRequest loginRequest);
 
     /**
@@ -86,7 +88,7 @@ public interface MatesService {
      * @param addFriSearchRequest
      * @return
      */
-    @POST("user/search/")
+    @POST("user/info/search/")
     Observable<AddFriSearchResponse> addFriendSearch(@Query("accessToken") String accessToken, @Body AddFriSearchRequest addFriSearchRequest);
 
     /**
@@ -136,4 +138,14 @@ public interface MatesService {
      */
     @POST("user/info/self/")
     Observable<MyInfoResponse> myInfo(@Query("accessToken") String accessToken);
+
+    /**
+     * 获取动态列表
+     *
+     * @param accessToken
+     * @param stateRequest
+     * @return
+     */
+    @POST("moment/list/")
+    Observable<StateResponse> getState(@Query("accessToken")String accessToken, @Body StateRequest stateRequest);
 }

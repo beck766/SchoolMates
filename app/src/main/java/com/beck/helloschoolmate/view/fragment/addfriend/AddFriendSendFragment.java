@@ -17,6 +17,9 @@ import com.beck.helloschoolmate.model.http.entity.addfriend.AddFriendSendRequest
 import com.beck.helloschoolmate.util.UIUtil;
 import com.beck.helloschoolmate.view.fragment.MateBaseFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,6 +41,7 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
     private int send_userId;
     private AddFriSendContract.Presenter presenter;
     private Dialog loadingDialog;
+    private List<Integer> userFriendGroupRIds=new ArrayList<>();
 
     public static AddFriendSendFragment newInstance() {
         return new AddFriendSendFragment();
@@ -70,7 +74,8 @@ public class AddFriendSendFragment extends MateBaseFragment<AddFriendActivity> i
     public void onViewClicked() {
         AddFriendSendRequest addFriendSendRequest = new AddFriendSendRequest();
         addFriendSendRequest.setToUserId(send_userId);
-        addFriendSendRequest.setFriendGroupId(0);
+        userFriendGroupRIds.add(0);
+        addFriendSendRequest.setUserFriendGroupRIds(userFriendGroupRIds);
         addFriendSendRequest.setMessage(etAddSendVerfiy.getText().toString().trim());
         addFriendSendRequest.setRemarkName(etAddSendRemark.getText().toString().trim());
         presenter.send(addFriendSendRequest);

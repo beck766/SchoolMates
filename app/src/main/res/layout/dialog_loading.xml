@@ -31,7 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="加载中..."
+            android:layout_gravity="center_horizontal"
+            android:text="正在登录..."
             android:textColor="#f0f0f0"
             android:textSize="15sp" />
     </LinearLayout>

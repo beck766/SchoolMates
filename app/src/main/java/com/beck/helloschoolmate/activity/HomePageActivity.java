@@ -22,6 +22,7 @@ import com.beck.helloschoolmate.R;
 import com.beck.helloschoolmate.activity.friend.AddFriendActivity;
 import com.beck.helloschoolmate.activity.userinfo.MyInformationActivity;
 import com.beck.helloschoolmate.presenter.FriendListPresenter;
+import com.beck.helloschoolmate.presenter.StatePresenter;
 import com.beck.helloschoolmate.view.fragment.homepage.DiscoverFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.LinkmanFragment;
 import com.beck.helloschoolmate.view.fragment.homepage.MapFragment;
@@ -161,7 +162,6 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
         Glide.with(this).load(userIcon).error(R.mipmap.user_icon).into(ivUserIcon);
     }
 
-
     @Override
     public void onTabSelected(int position) {
         switch (position) {
@@ -193,6 +193,7 @@ public class HomePageActivity extends BaseActivity implements BottomNavigationBa
             case 3:
                 if (stateFragment == null) {
                     stateFragment = StateFragment.newInstance();
+                    new StatePresenter(this, stateFragment);
                 }
                 switchFragment(stateFragment);
                 tvTitle.setText(R.string.fragment_title_state);

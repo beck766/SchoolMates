@@ -21,6 +21,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        myApplication=this;
         ApiClient.initMatesService(ApiConstants.MATE_HOST, MatesService.class);
     }
 }

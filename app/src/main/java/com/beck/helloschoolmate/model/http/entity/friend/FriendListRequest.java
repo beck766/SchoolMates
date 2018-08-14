@@ -7,16 +7,16 @@ package com.beck.helloschoolmate.model.http.entity.friend;
 public class FriendListRequest {
 
     /**
-     * friendGroupId : 0
+     * userFriendGroupRId : 0
      */
 
-    private int friendGroupId;
+    private int userFriendGroupRId;
 
-    public int getFriendGroupId() {
-        return friendGroupId;
+    public int getUserFriendGroupRId() {
+        return userFriendGroupRId;
     }
 
-    public void setFriendGroupId(int friendGroupId) {
-        this.friendGroupId = friendGroupId;
+    public void setUserFriendGroupRId(int userFriendGroupRId) {
+        this.userFriendGroupRId = userFriendGroupRId;
     }
 }

@@ -90,6 +90,9 @@ public class LinkmanFragment extends HomeBaseFragment implements FriendListContr
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "onDestroy: ");
+        String s = new String();
+        s.split("-");
         super.onDestroy();
     }
 
@@ -106,6 +109,7 @@ public class LinkmanFragment extends HomeBaseFragment implements FriendListContr
 
     @Override
     public void requestError(String error) {
+        srlLinkmanFriend.setRefreshing(false);
         Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
     }
 

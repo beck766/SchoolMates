@@ -3,6 +3,7 @@ package com.beck.helloschoolmate.view.fragment.register;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beck.base.util.NetworkUtils;
@@ -35,8 +37,10 @@ import butterknife.OnClick;
 public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> implements RegisterCodeContract.View {
 
     private static final String TAG = "RegisterCodeFragment";
-
     private RegisterCodeContract.Presenter presenter;
+    @BindView(R.id.tv_regiter_get_code)
+    TextView tvRegiterGetCode;
+
     @BindView(R.id.register_et_verifyCode)
     EditText registerEtVerifyCode;
 
@@ -98,14 +102,15 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
         super.onDestroyView();
     }
 
-    @OnClick({R.id.register_btn_getVerfiyCode, R.id.register_btn_next})
+    @OnClick({R.id.tv_regiter_get_code, R.id.register_btn_next})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.register_btn_getVerfiyCode:
+            case R.id.tv_regiter_get_code:
                 if (!NetworkUtils.isNetworkConnected(mActivity)) {
                     Toast.makeText(mActivity, "网络不稳定！", Toast.LENGTH_SHORT).show();
                 } else {
                     loadingDialog = UIUtil.createLoadingDialog(this.getContext(), "正在获取...");
+                    timer.start();
                     GetCodeRequest getCodeRequest = new GetCodeRequest();
                     getCodeRequest.setPhoneNumber(tel);
                     presenter.getVerfiyCode(getCodeRequest);
@@ -163,4 +168,23 @@ public class RegisterCodeFragment extends MateBaseFragment<RegisterActivity> imp
         mActivity.setFragment(registerPasswordFragment, "register_password", true);
         new RegisterPasswordPresenter(mActivity, registerPasswordFragment);
     }
+
+    /**
+     * 获取验证码后 六十秒重新获取
+     */
+    private CountDownTimer timer = new CountDownTimer(60000, 1000) {
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onTick(long millisUntilFinished) {
+            tvRegiterGetCode.setText((millisUntilFinished / 1000) + "秒");
+            tvRegiterGetCode.setEnabled(false);//防止重复点击
+        }
+
+        @Override
+        public void onFinish() {
+            tvRegiterGetCode.setEnabled(true);
+            tvRegiterGetCode.setText("获取验证码");
+        }
+    };
 }

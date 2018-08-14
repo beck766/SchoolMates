@@ -7,23 +7,19 @@ package com.beck.helloschoolmate.model.http.entity.login;
 public class LoginRequest {
 
     /**
-     * phoneNumber : 18270889760
+     * account : 15013809484
      * password : 123456
-     * captcha :
-     * loginType : 0
      */
 
-    private String phoneNumber;
+    private String account;
     private String password;
-    private String captcha;
-    private int loginType;
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getAccount() {
+        return account;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {
@@ -32,21 +28,5 @@ public class LoginRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCaptcha() {
-        return captcha;
-    }
-
-    public void setCaptcha(String captcha) {
-        this.captcha = captcha;
-    }
-
-    public int getLoginType() {
-        return loginType;
-    }
-
-    public void setLoginType(int loginType) {
-        this.loginType = loginType;
     }
 }

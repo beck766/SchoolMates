@@ -3,10 +3,10 @@ package com.beck.helloschoolmate.presenter;
 import android.content.Context;
 import android.util.Log;
 
-import com.beck.helloschoolmate.contract.FriendListContract;
-import com.beck.helloschoolmate.model.http.entity.friend.FriendListRequest;
-import com.beck.helloschoolmate.model.http.entity.friend.FriendResponse;
-import com.beck.helloschoolmate.model.repository.FriendListRepository;
+import com.beck.helloschoolmate.contract.StateContract;
+import com.beck.helloschoolmate.model.http.entity.state.StateRequest;
+import com.beck.helloschoolmate.model.http.entity.state.StateResponse;
+import com.beck.helloschoolmate.model.repository.GetStateRepository;
 import com.beck.helloschoolmate.util.UserManager;
 
 import java.net.SocketTimeoutException;
@@ -18,16 +18,17 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by beck on 2018/6/11.
+ * Created by beck on 2018/8/11.
  */
 
-public class FriendListPresenter implements FriendListContract.Presenter {
+public class StatePresenter implements StateContract.Presenter{
 
-    private static final String TAG = "FriendListPresenter";
-    private FriendListContract.View view;
+    private static final String TAG = "StatePresenter";
+    private StateContract.View view;
     private Context context;
+    private DisposableObserver<StateResponse> disposableObserver;
 
-    public FriendListPresenter(Context context, FriendListContract.View view) {
+    public StatePresenter(Context context, StateContract.View view) {
         this.view = view;
         this.context = context;
         view.setPresenter(this);
@@ -36,19 +37,23 @@ public class FriendListPresenter implements FriendListContract.Presenter {
     @Override
     public void subscribe() {
         String userToken = UserManager.getInstance().getUserToken(context);
-        FriendListRequest friendListRequest = new FriendListRequest();
-        friendListRequest.setUserFriendGroupRId(0);
-        new FriendListRepository().getFriendList(context, userToken, friendListRequest)
+        StateRequest stateRequest = new StateRequest();
+        stateRequest.setPage(1);
+        stateRequest.setPageCount(6);
+        if (disposableObserver!=null){
+            disposableObserver.dispose();
+        }
+        disposableObserver = new GetStateRepository().getStateList(context, userToken, stateRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<FriendResponse>() {
+                .subscribeWith(new DisposableObserver<StateResponse>() {
                     @Override
-                    public void onNext(FriendResponse friendResponse) {
-                        if (friendResponse.isSuccess()) {
-                            List<FriendResponse.ResultBean> result = friendResponse.getResult();
-                            view.displayFriList(result);
+                    public void onNext(StateResponse stateResponse) {
+                        if (stateResponse.isSuccess()) {
+                            List<StateResponse.ResultBean> result = stateResponse.getResult();
+                            view.displayStateList(result);
                         }else {
-                            view.requestError(friendResponse.getErrorMsg());
+                            view.requestError(stateResponse.getErrorMsg());
                         }
                     }
 
