@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -29,26 +29,26 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile rootProject.ext.dependencies["support-v4"]
-    compile rootProject.ext.dependencies["appcompat-v7"]
-    compile rootProject.ext.dependencies["design"]
-    compile rootProject.ext.dependencies["recyclerview"]
-    compile rootProject.ext.dependencies["cardview"]
-    compile rootProject.ext.dependencies["rxjava"]
-    compile rootProject.ext.dependencies["rxandroid"]
-    compile rootProject.ext.dependencies["stream"]
-    compile rootProject.ext.dependencies["retrofit"]
-    compile rootProject.ext.dependencies["adapter-rxjava"]
-    compile rootProject.ext.dependencies["gson"]
-    compile rootProject.ext.dependencies["converter-gson"]
-    compile rootProject.ext.dependencies["okhttp3-logging-interceptor"]
-    compile rootProject.ext.dependencies["litepal"]
-    compile rootProject.ext.dependencies["glide"]
-    compile rootProject.ext.dependencies["bottom-navigation"]
-    compile 'org.glassfish:javax.annotation:10.0-b28'
-    compile 'com.android.support:multidex:1.0.2'
+    implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["recyclerview"]
+    implementation rootProject.ext.dependencies["cardview"]
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+    implementation rootProject.ext.dependencies["stream"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["adapter-rxjava"]
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["okhttp3-logging-interceptor"]
+    implementation rootProject.ext.dependencies["litepal"]
+    implementation rootProject.ext.dependencies["glide"]
+    implementation rootProject.ext.dependencies["bottom-navigation"]
+    implementation 'org.glassfish:javax.annotation:10.0-b28'
+    implementation 'com.android.support:multidex:1.0.2'
 }
